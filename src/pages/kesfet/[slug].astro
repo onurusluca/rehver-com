@@ -1,0 +1,24 @@
+---
+import SeoPage from "@/components/pages/DiscoverPage.astro";
+import { supabaseServer } from "@/utils/supabase";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { data: seoPages } = await supabaseServer
+    .from("seo_pages")
+    .select("slug_tr")
+    .not("slug_tr", "is", null);
+
+  return (
+    seoPages
+      ?.filter((page) => page.slug_tr)
+      .map((page) => ({
+        params: { slug: page.slug_tr as string },
+      })) || []
+  );
+};
+
+const slug = Astro.params.slug as string;
+---
+
+<SeoPage locale="tr" slug={slug} />

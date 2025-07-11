@@ -1,0 +1,240 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { t } from "@/utils/i18n";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  locale: "tr" | "en";
+}
+
+const { locale } = Astro.props;
+
+const pageTitle = t("site.termsOfService.title", locale);
+const pageDescription = t("site.termsOfService.description", locale);
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-black mb-4">{pageTitle}</h1>
+      <p class="text-gray-600 mb-4">
+        {t("site.termsOfService.description", locale)}
+      </p>
+      <p class="text-sm text-gray-500">
+        {t("site.termsOfService.lastUpdated", locale)}: {
+          new Date().toLocaleDateString(locale === "tr" ? "tr-TR" : "en-US")
+        }
+      </p>
+    </div>
+
+    <div class="prose prose-lg max-w-none">
+      <!-- Acceptance -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:check-circle" class="w-6 h-6 text-primary-600" />
+          {t("site.termsOfService.acceptance.title", locale)}
+        </h2>
+
+        <div class="bg-blue-50 rounded-lg p-6">
+          <p class="text-gray-700">
+            {t("site.termsOfService.acceptance.description", locale)}
+          </p>
+        </div>
+      </section>
+
+      <!-- Service Description -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:info-circle" class="w-6 h-6 text-primary-600" />
+          {t("site.termsOfService.serviceDescription.title", locale)}
+        </h2>
+
+        <div class="bg-green-50 rounded-lg p-6">
+          <p class="text-gray-700">
+            {t("site.termsOfService.serviceDescription.description", locale)}
+          </p>
+        </div>
+      </section>
+
+      <!-- Data Accuracy Disclaimer -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:alert-triangle" class="w-6 h-6 text-orange-600" />
+          {t("site.termsOfService.dataAccuracy.title", locale)}
+        </h2>
+
+        <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+          <div
+            class="bg-orange-100 border border-orange-300 rounded-lg p-4 mb-4"
+          >
+            <p class="font-semibold text-orange-800">
+              {t("site.termsOfService.dataAccuracy.warning", locale)}
+            </p>
+          </div>
+
+          <p class="text-gray-700 mb-3">
+            {t("site.termsOfService.dataAccuracy.description", locale)}
+          </p>
+
+          <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+            <li>İşletme saatlerinin veya müsaitliğin doğruluğu</li>
+            <li>Güncel telefon numaraları veya iletişim bilgileri</li>
+            <li>İşletme operasyonları veya hizmet kalitesi</li>
+            <li>Fiyatlandırma veya promosyon bilgileri</li>
+          </ul>
+
+          <div class="bg-white rounded-lg p-4">
+            <p class="text-gray-700 font-medium">
+              {t("site.termsOfService.dataAccuracy.advice", locale)}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Business Listings -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:building-store" class="w-6 h-6 text-primary-600" />
+          {t("site.termsOfService.businessListings.title", locale)}
+        </h2>
+
+        <div class="space-y-6">
+          <div class="bg-blue-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-black mb-3">
+              {
+                t(
+                  "site.termsOfService.businessListings.submission.title",
+                  locale
+                )
+              }
+            </h3>
+            <p class="text-gray-700 mb-3">
+              {
+                t(
+                  "site.termsOfService.businessListings.submission.description",
+                  locale
+                )
+              }
+            </p>
+            <ul class="list-disc list-inside text-gray-700 space-y-1">
+              <li>Bu bilgiyi sağlama yetkisine sahipsiniz</li>
+              <li>Bilgiler bildiğiniz kadarıyla doğrudur</li>
+              <li>Sağlanan fotoğraf veya içeriği kullanma hakkınız vardır</li>
+              <li>
+                Bu bilgilerin halka açık olarak görüntülenmesine izin verirsiniz
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-black mb-3">
+              {t("site.termsOfService.businessListings.removal.title", locale)}
+            </h3>
+            <p class="text-gray-700">
+              {
+                t(
+                  "site.termsOfService.businessListings.removal.description",
+                  locale
+                )
+              }
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Liability -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:shield-off" class="w-6 h-6 text-red-600" />
+          {t("site.termsOfService.liability.title", locale)}
+        </h2>
+
+        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+          <div class="bg-red-100 border border-red-300 rounded-lg p-4 mb-4">
+            <p class="font-semibold text-red-800">
+              {t("site.termsOfService.liability.disclaimer", locale)}
+            </p>
+          </div>
+
+          <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <li>Eski veya yanlış işletme bilgilerinden sorumlu değiliz</li>
+            <li>İşletme müsaitliği veya hizmet kalitesini garanti etmiyoruz</li>
+            <li>Kullanıcılar işletmeleri kendi riskleri ile ziyaret eder</li>
+            <li>
+              Hizmetimizin kullanımından kaynaklanan hiçbir zarardan sorumlu
+              değiliz
+            </li>
+            <li>İşletme sahipleri bilgilerini güncel tutmaktan sorumludur</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Governing Law -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:gavel" class="w-6 h-6 text-primary-600" />
+          {t("site.termsOfService.governingLaw.title", locale)}
+        </h2>
+
+        <div class="bg-gray-50 rounded-lg p-6">
+          <p class="text-gray-700">
+            {t("site.termsOfService.governingLaw.description", locale)}
+          </p>
+        </div>
+      </section>
+
+      <!-- Changes -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:edit" class="w-6 h-6 text-primary-600" />
+          {t("site.termsOfService.changes.title", locale)}
+        </h2>
+
+        <div class="bg-yellow-50 rounded-lg p-6">
+          <p class="text-gray-700">
+            {t("site.termsOfService.changes.description", locale)}
+          </p>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="bg-primary-50 rounded-lg p-6">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:mail" class="w-6 h-6 text-primary-600" />
+          {t("site.termsOfService.contact.title", locale)}
+        </h2>
+        <p class="text-gray-700 mb-3">
+          {t("site.termsOfService.contact.description", locale)}
+        </p>
+        <div class="bg-white rounded-lg p-4">
+          <p class="text-gray-700">
+            E-posta: <a
+              href="mailto:iletisim@rehver.com"
+              class="text-primary-600 hover:text-primary-700"
+              >iletisim@rehver.com</a
+            >
+            <br />
+            Adres: Konya, Türkiye
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</MainLayout>

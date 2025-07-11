@@ -1,0 +1,19 @@
+{
+  "i18n-ally.localesPaths": ["i18n"],
+  "i18n-ally.sourceLanguage": "tr",
+  "i18n-ally.keystyle": "nested",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "cSpell.words": [
+    "MEILISEARCH",
+    "OPENROUTER",
+    "Rehver",
+    "Slideover",
+    "tabler",
+    "unref"
+  ]
+}

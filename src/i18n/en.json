@@ -1,0 +1,363 @@
+{
+    "common": {
+        "home": "Home",
+        "viewMore": "View More",
+        "city": "City"
+    },
+    "home": {
+        "hero": {
+            "title": "Discover Local",
+            "highlight": "Businesses",
+            "subtitle": "Find, review and connect with restaurants, cafes, shops and service providers",
+            "searchPlaceholder": "What are you looking for? (phone repair, cafe, pizza...)",
+            "searchButton": "Search"
+        },
+        "discoverTopics": {
+            "title": "Topics You Might Like"
+        },
+        "popularPlaces": {
+            "title": "Popular Places"
+        },
+        "newestPlaces": {
+            "title": "New Additions"
+        },
+        "places": "places",
+        "seo": {
+            "title": "Rehver - Discover Local Businesses Near You",
+            "description": "Turkey's most comprehensive local business directory. Discover, review and connect with restaurants, cafes, shops and service providers.",
+            "keywords": "local business, restaurant, cafe, shop, service, Konya, Antalya, Turkey"
+        }
+    },
+    "search": {
+        "title": "Search",
+        "placeholder": "Search businesses, categories or places...",
+        "button": "Search",
+        "foundResults": "{count} results found for \"{query}\"",
+        "noResultsFor": "No results found for \"{query}\"",
+        "noResults": "No results found",
+        "noResultsDescription": "Try different keywords",
+        "enterQuery": "Type something above to start searching",
+        "description": "Search businesses, categories and places",
+        "resultsFor": "Search results for \"{query}\"",
+        "pagination": {
+            "previous": "Previous",
+            "next": "Next"
+        }
+    },
+    "header": {
+        "nav": {
+            "discover": "Discover",
+            "openMobileMenu": "Open Mobile Menu"
+        }
+    },
+    "footer": {
+        "description": "Discover the best local businesses in your city. Find restaurants, cafes, services and more.",
+        "rights": "All rights reserved.",
+        "followUs": "Follow Us",
+        "discover": {
+            "title": "Explore",
+            "home": "Home",
+            "discover": "Discover"
+        },
+        "company": {
+            "title": "Company",
+            "about": "About Us",
+            "contact": "Contact",
+            "privacy": "Privacy Policy",
+            "terms": "Terms of Service"
+        }
+    },
+    "discover": {
+        "title": "Discover",
+        "pageTitle": "Discover - Find everything you are looking for and more",
+        "pageDescription": "Explore the best places in Turkey. From restaurants to entertainment venues, find everything you need in one place.",
+        "heroTitle": "Start Discovering",
+        "heroDescription": "Find the best places, services and experiences in your city",
+        "popularTopics": "Popular Topics",
+        "topPlacesTitle": "Top Places",
+        "newestPlacesTitle": "Newest Places",
+        "viewAll": "View All",
+        "places": "places",
+        "featuredPlaces": "Featured Places",
+        "showingPlaces": "Showing {showing} of {total} places",
+        "noPlaces": "No places found yet",
+        "noPlacesDescription": "No places have been added for this category yet"
+    },
+    "place": {
+        "places": "Places",
+        "location": "Location",
+        "reviews": "reviews",
+        "photos": "Photos",
+        "photo": "photo",
+        "contactInfo": "Contact Information",
+        "openingHours": "Opening Hours",
+        "call": "Call",
+        "tags": "Tags",
+        "productsAndServices": "Products and Services",
+        "days": {
+            "monday": "Monday",
+            "tuesday": "Tuesday",
+            "wednesday": "Wednesday",
+            "thursday": "Thursday",
+            "friday": "Friday",
+            "saturday": "Saturday",
+            "sunday": "Sunday"
+        },
+        "closed": "Closed",
+        "actions": {
+            "openInGoogleMaps": "Open in Google Maps",
+            "openInAppleMaps": "Open in Apple Maps",
+            "openWebsite": "Go to Website"
+        },
+        "copy": {
+            "phone": "Copy Phone Number",
+            "address": "Copy Address",
+            "website": "Copy Website URL",
+            "email": "Copy Email Address"
+        }
+    },
+    "error": {
+        "404": {
+            "title": "Page Not Found",
+            "description": "The page you're looking for doesn't exist or may have been moved.",
+            "goHome": "Go Home",
+            "discover": "Discover"
+        }
+    },
+    "site": {
+        "aboutUs": {
+            "hero": {
+                "title": "Turkey's Most Comprehensive Business Directory",
+                "subtitle": "Discover the best local businesses in your city with Rehver. Find restaurants, cafes, services and more."
+            },
+            "stats": {
+                "businesses": "Businesses",
+                "cities": "Cities",
+                "users": "Users",
+                "searches": "Searches"
+            },
+            "mission": {
+                "title": "Our Mission",
+                "description1": "Rehver was founded to support local businesses and help people discover the best places in their cities.",
+                "description2": "We work to strengthen the online presence of local businesses and connect them with potential customers."
+            },
+            "values": {
+                "title": "Our Values",
+                "subtitle": "The fundamental values and principles that guide us at Rehver.",
+                "accuracy": {
+                    "title": "Accuracy",
+                    "description": "We continuously work to share current and accurate information with our users."
+                },
+                "community": {
+                    "title": "Community",
+                    "description": "We aim to create a strong community between local businesses and users."
+                },
+                "innovation": {
+                    "title": "Innovation",
+                    "description": "We improve our service by continuously innovating in technology and user experience."
+                },
+                "trust": {
+                    "title": "Trust",
+                    "description": "We provide transparent and reliable service to earn the trust of our users and businesses."
+                }
+            },
+            "features": {
+                "title": "Our Features",
+                "subtitle": "Unique features and advantages that Rehver offers you.",
+                "search": {
+                    "title": "Advanced Search",
+                    "description": "Easily find the business you want by searching in detail by category, location and features."
+                },
+                "discover": {
+                    "title": "Discover",
+                    "description": "Discover hidden gems and popular places in your city."
+                },
+                "information": {
+                    "title": "Detailed Information",
+                    "description": "Comprehensive information for each business including address, phone, opening hours and features."
+                },
+                "mobile": {
+                    "title": "Mobile Friendly",
+                    "description": "Fast and user-friendly interface that works perfectly on all devices."
+                }
+            },
+            "vision": {
+                "title": "Our Vision",
+                "description": "To be a digital platform that supports the local economy in every city of Turkey and builds bridges between businesses and customers.",
+                "goals": {
+                    "nationwide": {
+                        "title": "Nationwide",
+                        "description": "Provide comprehensive business directory in 81 provinces"
+                    },
+                    "growth": {
+                        "title": "Growth",
+                        "description": "Contribute to the digital growth of local businesses"
+                    },
+                    "community": {
+                        "title": "Community",
+                        "description": "Create strong local communities"
+                    }
+                }
+            },
+            "cta": {
+                "title": "Get in Touch with Us",
+                "description": "Have questions? Collaboration suggestions? We'd love to hear from you!",
+                "contact": "Contact",
+                "explore": "Explore"
+            },
+            "seo": {
+                "title": "About Us | Rehver",
+                "description": "Discover the best local businesses in your city with Rehver. Find restaurants, cafes, services and more."
+            }
+        },
+        "contactUs": {
+            "hero": {
+                "title": "Get in Touch with Us",
+                "subtitle": "Contact us for your questions, suggestions and feedback. We'd be happy to help you."
+            },
+            "reasons": {
+                "title": "How Can We Help You?",
+                "subtitle": "Choose the topic you want to contact us about:",
+                "general": {
+                    "title": "General Questions",
+                    "description": "What you're curious about the platform"
+                },
+                "business": {
+                    "title": "Add Business",
+                    "description": "To add your business to the platform"
+                },
+                "technical": {
+                    "title": "Technical Support",
+                    "description": "Technical issues and bug reports"
+                },
+                "partnership": {
+                    "title": "Partnership",
+                    "description": "Collaboration and partnership proposals"
+                }
+            },
+            "emailContact": {
+                "title": "Email Contact",
+                "description": "Contact us for your questions, suggestions and feedback."
+            },
+            "quickContact": {
+                "title": "Quick Contact"
+            },
+            "info": {
+                "hours": {
+                    "value": "Monday - Friday: 09:00 - 18:00"
+                },
+                "location": {
+                    "value": "Turkey"
+                }
+            },
+            "faq": {
+                "title": "Frequently Asked Questions",
+                "q1": {
+                    "question": "How quickly do you respond?",
+                    "answer": "We typically respond to all messages within 24 hours. For urgent matters, we try to respond the same day."
+                },
+                "q2": {
+                    "question": "How can I add my business?",
+                    "answer": "To add your business, send us an email. We'll share the necessary information and expedite the process."
+                },
+                "q3": {
+                    "question": "What languages do you support?",
+                    "answer": "We currently provide support in Turkish and English. We can consider special requests for other languages."
+                }
+            },
+            "social": {
+                "title": "Social Media",
+                "description": "Follow our social media accounts for the latest news and announcements."
+            },
+            "seo": {
+                "title": "Contact | Rehver",
+                "description": "Contact Rehver. Get in touch with us for your questions, suggestions and feedback."
+            }
+        },
+        "privacyPolicy": {
+            "title": "Privacy Policy",
+            "description": "This Privacy Policy explains how Rehver collects, uses, and protects your personal information.",
+            "lastUpdated": "Last updated",
+            "informationWeCollect": {
+                "title": "Information We Collect",
+                "analyticsData": {
+                    "title": "Analytics Data",
+                    "description": "We use Cloudflare Analytics to understand how visitors use our website."
+                },
+                "businessInfo": {
+                    "title": "Business Information",
+                    "description": "When businesses submit their information, we collect:"
+                }
+            },
+            "howWeUse": {
+                "title": "How We Use Information"
+            },
+            "informationSharing": {
+                "title": "Information Sharing",
+                "description": "We do not sell, trade, or share your personal information with third parties."
+            },
+            "dataRetention": {
+                "title": "Data Retention",
+                "description": "Analytics data is retained by Cloudflare according to their data retention policy."
+            },
+            "yourRights": {
+                "title": "Your Rights",
+                "description": "Under GDPR and Turkish KVKK law, you have the right to:"
+            },
+            "cookies": {
+                "title": "Cookies and Tracking",
+                "description": "We use essential cookies for website functionality."
+            },
+            "contact": {
+                "title": "Contact Us",
+                "description": "For privacy-related questions, contact us at:"
+            }
+        },
+        "termsOfService": {
+            "title": "Terms of Service",
+            "description": "These Terms of Service govern your use of the Rehver website and services.",
+            "lastUpdated": "Last updated",
+            "acceptance": {
+                "title": "Acceptance of Terms",
+                "description": "By accessing and using Rehver, you accept and agree to be bound by these Terms of Service."
+            },
+            "serviceDescription": {
+                "title": "Service Description",
+                "description": "Rehver is a local business directory platform that displays information about businesses in Turkey."
+            },
+            "dataAccuracy": {
+                "title": "Data Accuracy Disclaimer",
+                "warning": "IMPORTANT: Business information may not be 100% current or accurate.",
+                "description": "Business hours, contact information, and other details are provided for informational purposes only.",
+                "advice": "Always verify information directly with the business before visiting or making decisions based on our listings."
+            },
+            "businessListings": {
+                "title": "Business Listings",
+                "submission": {
+                    "title": "Submission",
+                    "description": "Businesses may submit their information for inclusion in our directory."
+                },
+                "removal": {
+                    "title": "Removal Requests",
+                    "description": "Business owners may request removal of their listings by contacting us."
+                }
+            },
+            "liability": {
+                "title": "Limitation of Liability",
+                "disclaimer": "REHVER IS PROVIDED 'AS IS' WITHOUT WARRANTIES OF ANY KIND."
+            },
+            "governingLaw": {
+                "title": "Governing Law",
+                "description": "These terms are governed by Turkish law."
+            },
+            "changes": {
+                "title": "Changes to Terms",
+                "description": "We may update these terms at any time."
+            },
+            "contact": {
+                "title": "Contact Us",
+                "description": "For questions about these terms, contact us at:"
+            }
+        }
+    }
+}

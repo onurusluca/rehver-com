@@ -1,85 +1,69 @@
 ---
+import "@/styles/global.css";
+
 export interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   image?: string;
   locale?: "tr" | "en";
 }
 
 const { title, description, image, locale = "tr" } = Astro.props;
-const canonicalURL = Astro.site
-  ? new URL(Astro.url.pathname, Astro.site)
-  : Astro.url;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Remove /en prefix for canonical on Turkish pages
+const canonicalPath = Astro.url.pathname.replace(/^\/en/, "");
+const trCanonical = new URL(canonicalPath, Astro.site);
+const enCanonical = new URL(`/en${canonicalPath}`, Astro.site);
 ---
 
 <!doctype html>
 <html lang={locale}>
   <head>
     <meta charset="UTF-8" />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL.href} />
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://rehver.b-cdn.net" />
+    <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <!-- Canonical URLs -->
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="tr" href={trCanonical} />
+    <link rel="alternate" hreflang="en" href={enCanonical} />
+    <link rel="alternate" hreflang="x-default" href={trCanonical} />
+
+    <!-- Meta tags -->
+    <title>{title}</title>
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
     {image && <meta property="og:image" content={image} />}
 
-    <!-- Preconnects -->
-    <link rel="preconnect" href="https://rehver.b-cdn.net" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image} />}
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#ffffff" />
   </head>
-  <body class="bg-gray-50">
-    <header class="bg-white shadow-sm">
-      <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 justify-between items-center">
-          <div class="flex items-center">
-            <a
-              href={locale === "en" ? "/en" : "/"}
-              class="text-xl font-bold text-blue-600"
-            >
-              Rehver
-            </a>
-          </div>
-          <div class="flex space-x-4">
-            <a href="/ara" class="text-gray-700 hover:text-blue-600"> Ara </a>
-            <a
-              href={locale === "en" ? "/en/discover" : "/kesfet"}
-              class="text-gray-700 hover:text-blue-600"
-            >
-              {locale === "en" ? "Discover" : "Keşfet"}
-            </a>
-            <a
-              href={locale === "en" ? "/en/about-us" : "/hakkimizda"}
-              class="text-gray-700 hover:text-blue-600"
-            >
-              {locale === "en" ? "About Us" : "Hakkımızda"}
-            </a>
-          </div>
-        </div>
-      </nav>
-    </header>
+  <body class="min-h-screen bg-layout-bg">
+    <slot />
 
-    <main>
-      <slot />
-    </main>
-
-    <footer class="bg-gray-900 text-white">
-      <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <p>
-            &copy; 2025 Rehver. {
-              locale === "en" ? "All rights reserved." : "Tüm hakları saklıdır."
-            }
-          </p>
-        </div>
-      </div>
-    </footer>
+    <!-- Cloudflare Analytics -->
+    {
+      import.meta.env.PUBLIC_ENVIRONMENT === "production" && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={`{"token": "${import.meta.env.PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN}"}`}
+        />
+      )
+    }
   </body>
 </html>

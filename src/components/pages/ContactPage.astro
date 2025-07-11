@@ -1,0 +1,205 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { t } from "@/utils/i18n";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  locale: "tr" | "en";
+}
+
+const { locale } = Astro.props;
+
+const pageTitle = t("site.contactUs.seo.title", locale);
+const pageDescription = t("site.contactUs.seo.description", locale);
+
+const reasons = [
+  {
+    title: t("site.contactUs.reasons.general.title", locale),
+    description: t("site.contactUs.reasons.general.description", locale),
+    icon: "tabler:help-circle",
+  },
+  {
+    title: t("site.contactUs.reasons.business.title", locale),
+    description: t("site.contactUs.reasons.business.description", locale),
+    icon: "tabler:building-store",
+  },
+  {
+    title: t("site.contactUs.reasons.technical.title", locale),
+    description: t("site.contactUs.reasons.technical.description", locale),
+    icon: "tabler:bug",
+  },
+  {
+    title: t("site.contactUs.reasons.partnership.title", locale),
+    description: t("site.contactUs.reasons.partnership.description", locale),
+    icon: "tabler:handshake",
+  },
+];
+
+const faqItems = [
+  {
+    question: t("site.contactUs.faq.q1.question", locale),
+    answer: t("site.contactUs.faq.q1.answer", locale),
+  },
+  {
+    question: t("site.contactUs.faq.q2.question", locale),
+    answer: t("site.contactUs.faq.q2.answer", locale),
+  },
+  {
+    question: t("site.contactUs.faq.q3.question", locale),
+    answer: t("site.contactUs.faq.q3.answer", locale),
+  },
+];
+
+const socialLinks = [
+  {
+    name: "Twitter",
+    icon: "tabler:brand-twitter",
+    url: "https://twitter.com/rehvercom",
+  },
+  {
+    name: "Instagram",
+    icon: "tabler:brand-instagram",
+    url: "https://instagram.com/rehvercom",
+  },
+  {
+    name: "Facebook",
+    icon: "tabler:brand-facebook",
+    url: "https://facebook.com/rehvercom",
+  },
+];
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-black mb-4">
+      {t("site.contactUs.hero.title", locale)}
+    </h1>
+    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      {t("site.contactUs.hero.subtitle", locale)}
+    </p>
+  </section>
+
+  <!-- Contact Reasons -->
+  <section class="mb-16">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-black mb-4">
+        {t("site.contactUs.reasons.title", locale)}
+      </h2>
+      <p class="text-gray-600">
+        {t("site.contactUs.reasons.subtitle", locale)}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        reasons.map((reason) => (
+          <div class="bg-white rounded-lg border border-gray-200 p-6 text-center hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 mx-auto mb-4 bg-primary-100 rounded-lg flex items-center justify-center">
+              <Icon name={reason.icon} class="w-6 h-6 text-primary-600" />
+            </div>
+            <h3 class="text-lg font-semibold text-black mb-2">
+              {reason.title}
+            </h3>
+            <p class="text-gray-600 text-sm">{reason.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Contact Info -->
+  <section class="mb-16">
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Email Contact -->
+      <div class="bg-white rounded-lg border border-gray-200 p-8">
+        <h3 class="text-xl font-semibold text-black mb-4">
+          {t("site.contactUs.emailContact.title", locale)}
+        </h3>
+        <p class="text-gray-600 mb-6">
+          {t("site.contactUs.emailContact.description", locale)}
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <Icon name="tabler:mail" class="w-5 h-5 text-gray-400" />
+            <a
+              href="mailto:iletisim@rehver.com"
+              class="text-primary-600 hover:text-primary-700"
+            >
+              iletisim@rehver.com
+            </a>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <Icon name="tabler:clock" class="w-5 h-5 text-gray-400" />
+            <span class="text-gray-700"
+              >{t("site.contactUs.info.hours.value", locale)}</span
+            >
+          </div>
+
+          <div class="flex items-center gap-3">
+            <Icon name="tabler:map-pin" class="w-5 h-5 text-gray-400" />
+            <span class="text-gray-700"
+              >{t("site.contactUs.info.location.value", locale)}</span
+            >
+          </div>
+        </div>
+
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <a
+            href="mailto:iletisim@rehver.com"
+            class="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg transition-colors w-full justify-center"
+          >
+            <Icon name="tabler:mail" class="w-4 h-4" />
+            {t("site.contactUs.quickContact.title", locale)}
+          </a>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="bg-white rounded-lg border border-gray-200 p-8">
+        <h3 class="text-xl font-semibold text-black mb-6">
+          {t("site.contactUs.faq.title", locale)}
+        </h3>
+
+        <div class="space-y-4">
+          {
+            faqItems.map((faq) => (
+              <div class="border-b border-gray-100 pb-4 last:border-b-0">
+                <h4 class="font-medium text-black mb-2">{faq.question}</h4>
+                <p class="text-gray-600 text-sm">{faq.answer}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media -->
+  <section class="text-center">
+    <h3 class="text-2xl font-bold text-black mb-4">
+      {t("site.contactUs.social.title", locale)}
+    </h3>
+    <p class="text-gray-600 mb-8">
+      {t("site.contactUs.social.description", locale)}
+    </p>
+
+    <div class="flex justify-center gap-4">
+      {
+        socialLinks.map((social) => (
+          <a
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-12 h-12 bg-white border border-gray-200 rounded-lg flex items-center justify-center text-gray-400 hover:text-primary-600 hover:border-primary-200 hover:bg-primary-50 transition-all"
+            aria-label={social.name}
+          >
+            <Icon name={social.icon} class="w-5 h-5" />
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</MainLayout>

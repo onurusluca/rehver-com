@@ -1,0 +1,136 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import PlaceCard from "@/components/PlaceCard.astro";
+import { t } from "@/utils/i18n";
+import { supabaseServer } from "@/utils/supabase";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  locale: "tr" | "en";
+  slug: string;
+}
+
+const { locale, slug } = Astro.props;
+
+const { data: seoPage } = await supabaseServer
+  .from("seo_pages")
+  .select("*")
+  .eq(locale === "tr" ? "slug_tr" : "slug_en", slug)
+  .single();
+
+if (!seoPage) {
+  return Astro.redirect("/404");
+}
+
+// Fetch places for this SEO page
+const { data: places } = await supabaseServer
+  .from("places")
+  .select("*")
+  .in("id", seoPage.place_ids)
+  .limit(20)
+  .order("view_count", { ascending: false });
+
+const pageTitle = locale === "tr" ? seoPage.title_tr : seoPage.title_en;
+const pageDescription =
+  locale === "tr" ? seoPage.description_tr : seoPage.description_en;
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-6xl mx-auto">
+    <!-- Breadcrumb -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+        <a href={locale === "en" ? "/en" : "/"} class="hover:text-primary-600"
+          >{t("common.home", locale)}</a
+        >
+        <Icon name="tabler:chevron-right" class="w-4 h-4" />
+        <a
+          href={`${locale === "en" ? "/en" : ""}/discover`}
+          class="hover:text-primary-600">{t("discover.title", locale)}</a
+        >
+        <Icon name="tabler:chevron-right" class="w-4 h-4" />
+        <span class="text-black">{pageTitle}</span>
+      </div>
+
+      <h1 class="text-3xl font-bold text-black mb-4">{pageTitle}</h1>
+      <p class="text-lg text-gray-600 leading-relaxed">{pageDescription}</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="bg-white rounded-lg border border-gray-200 p-6 mb-8">
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center"
+          >
+            <Icon name="tabler:map-pin" class="w-6 h-6 text-primary-600" />
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-black">
+              {seoPage.places_count}
+            </div>
+            <div class="text-sm text-gray-600">
+              {t("discover.places", locale)}
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div
+            class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center"
+          >
+            <Icon name="tabler:building" class="w-6 h-6 text-blue-600" />
+          </div>
+          <div>
+            <div class="text-lg font-semibold text-black">{seoPage.city}</div>
+            <div class="text-sm text-gray-600">
+              {seoPage.district || t("common.city", locale)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Places Grid -->
+    {
+      places && places.length > 0 ? (
+        <div>
+          <div class="mb-6">
+            <h2 class="text-2xl font-semibold text-black">
+              {t("discover.featuredPlaces", locale)}
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {places.map((place) => (
+              <PlaceCard place={place} locale={locale} />
+            ))}
+          </div>
+
+          {seoPage.places_count > 20 && (
+            <div class="text-center mt-8">
+              <p class="text-gray-600">
+                {t("discover.showingPlaces", locale, {
+                  showing: places.length,
+                  total: seoPage.places_count,
+                })}
+              </p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div class="text-center py-12">
+          <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+            <Icon name="tabler:map-pin" class="w-8 h-8 text-gray-400" />
+          </div>
+          <h3 class="text-lg font-medium text-gray-900 mb-2">
+            {t("discover.noPlaces", locale)}
+          </h3>
+          <p class="text-gray-600">
+            {t("discover.noPlacesDescription", locale)}
+          </p>
+        </div>
+      )
+    }
+  </div>
+</MainLayout>

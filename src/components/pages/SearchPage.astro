@@ -1,0 +1,179 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import SearchForm from "@/components/nav/SearchForm.astro";
+import PlaceCard from "@/components/PlaceCard.astro";
+import { t } from "@/utils/i18n";
+import { searchClient } from "@/utils/meilisearch";
+
+interface Props {
+  locale: "tr" | "en";
+}
+
+const { locale } = Astro.props;
+
+const query = Astro.url.searchParams.get("q") || "";
+const page = parseInt(Astro.url.searchParams.get("page") || "1");
+const limit = 20;
+const offset = (page - 1) * limit;
+
+let searchResults: any[] = [];
+let totalHits = 0;
+let searchTime = 0;
+let error = "";
+
+if (query) {
+  try {
+    const startTime = Date.now();
+    
+    const results = await searchClient.multiSearch({
+      queries: [
+        {
+          indexUid: "places",
+          q: query,
+          limit,
+          offset,
+          attributesToRetrieve: [
+            "id", "slug", "name", "description_tr", "description_en", 
+            "city", "district", "image_urls", "main_category", "rating", "reviews_count"
+          ]
+        }
+      ]
+    });
+    
+    searchTime = Date.now() - startTime;
+    const placeResults = results.results[0];
+    searchResults = placeResults.hits || [];
+    totalHits = placeResults.totalHits || 0;
+  } catch (err) {
+    console.error("Search error:", err);
+    error = "Search failed";
+    
+    // Fallback to Supabase search
+    try {
+      const { supabaseServer } = await import("@/utils/supabase");
+      const { data: places } = await supabaseServer
+        .from("places")
+        .select("*")
+        .or(`name.ilike.%${query}%,description_tr.ilike.%${query}%,description_en.ilike.%${query}%`)
+        .limit(limit)
+        .range(offset, offset + limit - 1);
+      
+      searchResults = places || [];
+      totalHits = places?.length || 0;
+      error = "";
+    } catch (fallbackErr) {
+      console.error("Fallback search error:", fallbackErr);
+    }
+  }
+}
+
+const pageTitle = query 
+  ? t("search.resultsFor", locale, { query })
+  : t("search.title", locale);
+const pageDescription = t("search.description", locale);
+
+const totalPages = Math.ceil(totalHits / limit);
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-4xl mx-auto">
+    <!-- Search Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-black mb-4">
+        {t("search.title", locale)}
+      </h1>
+      <SearchForm locale={locale} query={query} />
+    </div>
+
+    {query ? (
+      <div>
+        <!-- Results Header -->
+        <div class="mb-6">
+          <p class="text-gray-600">
+            {totalHits > 0 
+              ? t("search.foundResults", locale, { count: totalHits, query })
+              : t("search.noResultsFor", locale, { query })
+            }
+          </p>
+          {searchTime > 0 && (
+            <p class="text-sm text-gray-400 mt-1">
+              {searchTime}ms
+            </p>
+          )}
+          {error && (
+            <p class="text-sm text-red-600 mt-1">
+              {error} - Using fallback search
+            </p>
+          )}
+        </div>
+
+        {searchResults.length > 0 ? (
+          <div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+              {searchResults.map((place) => (
+                <PlaceCard place={place} locale={locale} />
+              ))}
+            </div>
+
+            <!-- Pagination -->
+            {totalPages > 1 && (
+              <div class="flex justify-center">
+                <div class="flex items-center space-x-2">
+                  {page > 1 && (
+                    <a 
+                      href={`?q=${encodeURIComponent(query)}&page=${page - 1}`}
+                      class="px-3 py-2 text-sm bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                    >
+                      {t("search.pagination.previous", locale)}
+                    </a>
+                  )}
+                  
+                  <span class="px-3 py-2 text-sm bg-primary-500 text-white rounded-md">
+                    {page}
+                  </span>
+                  
+                  {offset + limit < totalHits && (
+                    <a 
+                      href={`?q=${encodeURIComponent(query)}&page=${page + 1}`}
+                      class="px-3 py-2 text-sm bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                    >
+                      {t("search.pagination.next", locale)}
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div class="text-center py-12">
+            <div class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+              <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-black mb-2">
+              {t("search.noResults", locale)}
+            </h3>
+            <p class="text-gray-600">
+              {t("search.noResultsDescription", locale)}
+            </p>
+          </div>
+        )}
+      </div>
+    ) : (
+      <div class="text-center py-12">
+        <div class="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-full flex items-center justify-center">
+          <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-black mb-2">
+          {t("search.enterQuery", locale)}
+        </h3>
+        <p class="text-gray-600">
+          {t("search.description", locale)}
+        </p>
+      </div>
+    )}
+  </div>
+</MainLayout>

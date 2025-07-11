@@ -1,0 +1,138 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import PlaceCard from "@/components/PlaceCard.astro";
+import { t } from "@/utils/i18n";
+import { supabaseServer } from "@/utils/supabase";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  locale: "tr" | "en";
+}
+
+const { locale } = Astro.props;
+
+// Fetch data
+const { data: topPlaces } = await supabaseServer
+  .from("places")
+  .select("*")
+  .limit(8)
+  .order("view_count", { ascending: false });
+
+const { data: seoPages } = await supabaseServer
+  .from("seo_pages")
+  .select("*")
+  .limit(6)
+  .order("places_count", { ascending: false });
+
+const pageTitle = t("home.seo.title", locale);
+const pageDescription = t("home.seo.description", locale);
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section
+    class="bg-gradient-to-br from-primary-500 to-primary-600 px-4 py-20 -mx-4 mb-10 rounded-2xl"
+  >
+    <div class="relative mx-auto max-w-4xl text-center text-white">
+      <h1 class="mb-6 text-4xl font-bold md:text-6xl">
+        {t("home.hero.title", locale)}
+        <span class="text-yellow-400">{t("home.hero.highlight", locale)}</span>
+      </h1>
+      <p class="mb-10 text-lg opacity-90 md:text-xl">
+        {t("home.hero.subtitle", locale)}
+      </p>
+
+      <!-- Hero Search -->
+      <form
+        method="GET"
+        action={locale === "en" ? "/en/search" : "/arama"}
+        class="mx-auto"
+      >
+        <div
+          class="flex w-full flex-col items-center gap-3 rounded-2xl bg-white p-4 shadow-2xl md:flex-row"
+        >
+          <input
+            type="search"
+            name="q"
+            placeholder={t("home.hero.searchPlaceholder", locale)}
+            class="w-full flex-1 rounded-xl border-0 px-4 py-3 text-black placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:outline-none"
+          />
+          <button
+            type="submit"
+            class="w-full md:w-auto bg-primary-500 hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-xl transition-colors flex items-center justify-center gap-2"
+          >
+            <Icon name="tabler:search" class="w-5 h-5" />
+            {t("home.hero.searchButton", locale)}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <div class="space-y-16">
+    <!-- SEO Pages Section -->
+    {
+      seoPages && seoPages.length > 0 && (
+        <section>
+          <div class="mb-8 text-center">
+            <h2 class="mb-4 text-2xl font-bold text-black">
+              {t("home.discoverTopics.title", locale)}
+            </h2>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+            {seoPages.map((page) => {
+              const title = locale === "tr" ? page.title_tr : page.title_en;
+              const slug = locale === "tr" ? page.slug_tr : page.slug_en;
+              return (
+                <a
+                  href={`${locale === "en" ? "/en" : ""}/discover/${slug}`}
+                  class="group rounded-lg bg-white p-4 shadow-sm transition-all hover:shadow-md border border-gray-200"
+                >
+                  <div class="flex items-center gap-4">
+                    <div class="flex h-12 w-12 items-center justify-center rounded bg-primary-100">
+                      <Icon
+                        name="tabler:map-pin"
+                        class="h-6 w-6 text-primary-600"
+                      />
+                    </div>
+                    <div class="flex-1">
+                      <h3 class="font-semibold text-black group-hover:text-primary-600 transition-colors">
+                        {title}
+                      </h3>
+                      <div class="flex items-center gap-2 text-sm text-gray-600">
+                        <span>{page.city}</span>
+                        <span class="bg-primary-100 text-primary-600 px-2 py-0.5 rounded text-xs font-medium">
+                          {page.places_count} {t("home.places", locale)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Popular Places Section -->
+    {
+      topPlaces && topPlaces.length > 0 && (
+        <section>
+          <div class="mb-8 text-center">
+            <h2 class="mb-4 text-2xl font-bold text-black">
+              {t("home.popularPlaces.title", locale)}
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+            {topPlaces.map((place) => (
+              <PlaceCard place={place} locale={locale} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</MainLayout>

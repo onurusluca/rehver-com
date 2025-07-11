@@ -1,0 +1,147 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import PlaceCard from "@/components/PlaceCard.astro";
+import { t } from "@/utils/i18n";
+import { supabaseServer } from "@/utils/supabase";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  locale: "tr" | "en";
+}
+
+const { locale } = Astro.props;
+
+// Fetch data
+const { data: seoPages } = await supabaseServer
+  .from("seo_pages")
+  .select("*")
+  .limit(12)
+  .order("places_count", { ascending: false });
+
+const { data: topPlaces } = await supabaseServer
+  .from("places")
+  .select("*")
+  .limit(12)
+  .order("view_count", { ascending: false });
+
+const { data: newestPlaces } = await supabaseServer
+  .from("places")
+  .select("*")
+  .limit(12)
+  .order("created_at", { ascending: false });
+
+const pageTitle = t("discover.pageTitle", locale);
+const pageDescription = t("discover.pageDescription", locale);
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section
+    class="bg-gradient-to-br from-primary-500 to-primary-600 px-4 py-16 -mx-4 mb-12 rounded-2xl"
+  >
+    <div class="text-center text-white">
+      <h1 class="text-4xl font-bold mb-4">
+        {t("discover.heroTitle", locale)}
+      </h1>
+      <p class="text-lg opacity-90 max-w-2xl mx-auto">
+        {t("discover.heroDescription", locale)}
+      </p>
+    </div>
+  </section>
+
+  <div class="space-y-16">
+    <!-- Popular Topics -->
+    {
+      seoPages && seoPages.length > 0 && (
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-black mb-2">
+              {t("discover.popularTopics", locale)}
+            </h2>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {seoPages.map((page) => {
+              const title = locale === "tr" ? page.title_tr : page.title_en;
+              const slug = locale === "tr" ? page.slug_tr : page.slug_en;
+              return (
+                <a
+                  href={`${locale === "en" ? "/en" : ""}/discover/${slug}`}
+                  class="group bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-all"
+                >
+                  <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Icon
+                        name="tabler:map-pin"
+                        class="w-6 h-6 text-primary-600"
+                      />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="font-semibold text-black group-hover:text-primary-600 transition-colors truncate">
+                        {title}
+                      </h3>
+                      <div class="flex items-center gap-2 text-sm text-gray-500">
+                        <span>{page.city}</span>
+                        <span class="bg-primary-100 text-primary-600 px-2 py-0.5 rounded text-xs font-medium">
+                          {page.places_count} {t("discover.places", locale)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Top Places -->
+    {
+      topPlaces && topPlaces.length > 0 && (
+        <section>
+          <div class="mb-8">
+            <h2 class="text-2xl font-bold text-black mb-2">
+              {t("discover.topPlacesTitle", locale)}
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {topPlaces.map((place) => (
+              <PlaceCard place={place} locale={locale} />
+            ))}
+          </div>
+
+          <div class="text-center mt-8">
+            <a
+              href={`${locale === "en" ? "/en" : ""}/yerler`}
+              class="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg transition-colors"
+            >
+              {t("discover.viewAll", locale)}
+              <Icon name="tabler:arrow-right" class="w-4 h-4" />
+            </a>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- Newest Places */
+    {newestPlaces && newestPlaces.length > 0 && (
+      <section>
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-black mb-2">
+            {t("discover.newestPlacesTitle", locale)}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {newestPlaces.map((place) => (
+            <PlaceCard place={place} locale={locale} />
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</MainLayout>-->
+  </div></MainLayout
+>

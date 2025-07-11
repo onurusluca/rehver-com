@@ -1,0 +1,326 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { t } from "@/utils/i18n";
+import { supabaseServer } from "@/utils/supabase";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  locale: "tr" | "en";
+  slug: string;
+}
+
+const { locale, slug } = Astro.props;
+
+const { data: place } = await supabaseServer
+  .from("places")
+  .select("*")
+  .eq("slug", slug)
+  .single();
+
+if (!place) {
+  return Astro.redirect("/404");
+}
+
+const pageTitle = `${place.name} - ${place.city}`;
+const pageDescription =
+  locale === "tr"
+    ? place.description_tr ||
+      `${place.name} hakkında bilgi, adres, telefon ve çalışma saatleri.`
+    : place.description_en ||
+      `Information about ${place.name}, address, phone and opening hours.`;
+
+const formatOpeningHours = (hours: any) => {
+  if (!hours || typeof hours !== "object") return null;
+
+  const dayNames = {
+    monday: t("place.days.monday", locale),
+    tuesday: t("place.days.tuesday", locale),
+    wednesday: t("place.days.wednesday", locale),
+    thursday: t("place.days.thursday", locale),
+    friday: t("place.days.friday", locale),
+    saturday: t("place.days.saturday", locale),
+    sunday: t("place.days.sunday", locale),
+  };
+
+  return Object.entries(hours).map(([day, time]) => ({
+    day: dayNames[day as keyof typeof dayNames] || day,
+    time: time === "Closed" ? t("place.closed", locale) : time,
+  }));
+};
+
+const description =
+  locale === "tr" ? place.description_tr : place.description_en;
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-6xl mx-auto">
+    <!-- Breadcrumb -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+        <a href={locale === "en" ? "/en" : "/"} class="hover:text-primary-600"
+          >{t("common.home", locale)}</a
+        >
+        <Icon name="tabler:chevron-right" class="w-4 h-4" />
+        <a
+          href={`${locale === "en" ? "/en" : ""}/yerler`}
+          class="hover:text-primary-600">{t("place.places", locale)}</a
+        >
+        <Icon name="tabler:chevron-right" class="w-4 h-4" />
+        <span class="text-black">{place.name}</span>
+      </div>
+
+      <h1 class="text-3xl font-bold text-black mb-2">{place.name}</h1>
+      <div class="flex items-center gap-4 text-gray-600">
+        <div class="flex items-center gap-1">
+          <Icon name="tabler:map-pin" class="w-5 h-5" />
+          <span>{place.district}, {place.city}</span>
+        </div>
+
+        {
+          place.rating && (
+            <div class="flex items-center gap-1">
+              <Icon name="tabler:star-filled" class="w-5 h-5 text-yellow-400" />
+              <span>{place.rating}</span>
+              {place.reviews_count && (
+                <span class="text-gray-400">
+                  ({place.reviews_count} {t("place.reviews", locale)})
+                </span>
+              )}
+            </div>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Main Content -->
+      <div class="lg:col-span-2 space-y-8">
+        <!-- Images -->
+        {
+          place.image_urls && place.image_urls.length > 0 && (
+            <section>
+              <h2 class="text-xl font-semibold text-black mb-4">
+                {t("place.photos", locale)}
+              </h2>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {place.image_urls.map((url, index) => (
+                  <div class="aspect-square rounded-lg overflow-hidden">
+                    <img
+                      src={url}
+                      alt={`${place.name} ${t("place.photo", locale)} ${index + 1}`}
+                      class="w-full h-full object-cover hover:scale-105 transition-transform"
+                      loading={index < 6 ? "eager" : "lazy"}
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Description -->
+        {
+          description && (
+            <section>
+              <div class="prose max-w-none">
+                <p class="text-gray-700 leading-relaxed">{description}</p>
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Tags -->
+        {
+          ((locale === "tr" ? place.tags_tr : place.tags_en) || []).length >
+            0 && (
+            <section>
+              <h2 class="text-xl font-semibold text-black mb-4">
+                {t("place.tags", locale)}
+              </h2>
+              <div class="flex flex-wrap gap-2">
+                {(locale === "tr" ? place.tags_tr : place.tags_en)?.map(
+                  (tag) => (
+                    <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                      {tag}
+                    </span>
+                  )
+                )}
+              </div>
+            </section>
+          )
+        }
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-6">
+        <!-- Contact Info -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <h3 class="text-lg font-semibold text-black mb-4">
+            {t("place.contactInfo", locale)}
+          </h3>
+
+          <div class="space-y-3">
+            {
+              place.phone_number && (
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <Icon name="tabler:phone" class="w-5 h-5 text-gray-400" />
+                    <span class="text-gray-700">{place.phone_number}</span>
+                  </div>
+                  <div class="flex gap-1">
+                    <a
+                      href={`tel:${place.phone_number}`}
+                      class="p-2 text-gray-400 hover:text-primary-600 transition-colors"
+                      title={t("place.call", locale)}
+                    >
+                      <Icon name="tabler:phone" class="w-4 h-4" />
+                    </a>
+                    <button
+                      onclick={`navigator.clipboard.writeText('${place.phone_number}')`}
+                      class="p-2 text-gray-400 hover:text-primary-600 transition-colors"
+                      title={t("place.copy.phone", locale)}
+                    >
+                      <Icon name="tabler:copy" class="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              )
+            }
+
+            {
+              place.website_uri && (
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <Icon name="tabler:world" class="w-5 h-5 text-gray-400" />
+                    <span class="text-gray-700 truncate">
+                      {place.website_uri}
+                    </span>
+                  </div>
+                  <a
+                    href={place.website_uri}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="p-2 text-gray-400 hover:text-primary-600 transition-colors"
+                    title={t("place.actions.openWebsite", locale)}
+                  >
+                    <Icon name="tabler:external-link" class="w-4 h-4" />
+                  </a>
+                </div>
+              )
+            }
+
+            {
+              place.email && (
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-3">
+                    <Icon name="tabler:mail" class="w-5 h-5 text-gray-400" />
+                    <span class="text-gray-700">{place.email}</span>
+                  </div>
+                  <a
+                    href={`mailto:${place.email}`}
+                    class="p-2 text-gray-400 hover:text-primary-600 transition-colors"
+                  >
+                    <Icon name="tabler:mail" class="w-4 h-4" />
+                  </a>
+                </div>
+              )
+            }
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <h3 class="text-lg font-semibold text-black mb-4">
+            {t("place.location", locale)}
+          </h3>
+
+          {
+            place.address && (
+              <div class="flex items-start gap-3 mb-4">
+                <Icon
+                  name="tabler:map-pin"
+                  class="w-5 h-5 text-gray-400 mt-0.5"
+                />
+                <div class="flex-1">
+                  <p class="text-gray-700">{place.address}</p>
+                  <p class="text-sm text-gray-500">
+                    {place.district}, {place.city}
+                  </p>
+                </div>
+                <button
+                  onclick={`navigator.clipboard.writeText('${place.address}')`}
+                  class="p-1 text-gray-400 hover:text-primary-600 transition-colors"
+                  title={t("place.copy.address", locale)}
+                >
+                  <Icon name="tabler:copy" class="w-4 h-4" />
+                </button>
+              </div>
+            )
+          }
+
+          {
+            place.latitude && place.longitude && (
+              <div class="space-y-2">
+                <a
+                  href={`https://maps.google.com/?q=${place.latitude},${place.longitude}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block w-full bg-primary-500 hover:bg-primary-600 text-white text-center py-2 px-4 rounded-lg transition-colors"
+                >
+                  {t("place.actions.openInGoogleMaps", locale)}
+                </a>
+                <a
+                  href={`https://maps.apple.com/?q=${place.latitude},${place.longitude}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block w-full bg-gray-100 hover:bg-gray-200 text-gray-700 text-center py-2 px-4 rounded-lg transition-colors"
+                >
+                  {t("place.actions.openInAppleMaps", locale)}
+                </a>
+              </div>
+            )
+          }
+        </div>
+
+        <!-- Opening Hours -->
+        {
+          place.opening_hours && (
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <h3 class="text-lg font-semibold text-black mb-4">
+                {t("place.openingHours", locale)}
+              </h3>
+
+              <div class="space-y-2">
+                {formatOpeningHours(place.opening_hours)?.map(
+                  ({ day, time }) => (
+                    <div class="flex justify-between">
+                      <span class="text-gray-600">{day}</span>
+                      <span
+                        class={
+                          time === t("place.closed", locale)
+                            ? "text-red-600"
+                            : "text-gray-700"
+                        }
+                      >
+                        {time}
+                      </span>
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          )
+        }
+
+        <!-- Category -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <span
+            class="bg-primary-100 text-primary-700 text-sm font-medium px-3 py-1 rounded-full"
+          >
+            {place.main_category}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</MainLayout>

@@ -1,0 +1,221 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { t } from "@/utils/i18n";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  locale: "tr" | "en";
+}
+
+const { locale } = Astro.props;
+
+const pageTitle = t("site.privacyPolicy.title", locale);
+const pageDescription = t("site.privacyPolicy.description", locale);
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-black mb-4">{pageTitle}</h1>
+      <p class="text-gray-600 mb-4">
+        {t("site.privacyPolicy.description", locale)}
+      </p>
+      <p class="text-sm text-gray-500">
+        {t("site.privacyPolicy.lastUpdated", locale)}: {
+          new Date().toLocaleDateString(locale === "tr" ? "tr-TR" : "en-US")
+        }
+      </p>
+    </div>
+
+    <div class="prose prose-lg max-w-none">
+      <!-- Information We Collect -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:database" class="w-6 h-6 text-primary-600" />
+          {t("site.privacyPolicy.informationWeCollect.title", locale)}
+        </h2>
+
+        <div class="bg-blue-50 rounded-lg p-6 mb-6">
+          <h3 class="text-lg font-medium text-black mb-3">
+            {
+              t(
+                "site.privacyPolicy.informationWeCollect.analyticsData.title",
+                locale
+              )
+            }
+          </h3>
+          <p class="text-gray-700 mb-3">
+            {
+              t(
+                "site.privacyPolicy.informationWeCollect.analyticsData.description",
+                locale
+              )
+            }
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>IP adresleri (anonimleştirilmiş)</li>
+            <li>Tarayıcı türü ve versiyonu</li>
+            <li>İşletim sistemi</li>
+            <li>Ziyaret edilen sayfalar ve geçirilen süre</li>
+            <li>Yönlendiren web siteleri</li>
+            <li>Ülke ve bölge (IP'den türetilmiş)</li>
+          </ul>
+        </div>
+
+        <div class="bg-green-50 rounded-lg p-6">
+          <h3 class="text-lg font-medium text-black mb-3">
+            {
+              t(
+                "site.privacyPolicy.informationWeCollect.businessInfo.title",
+                locale
+              )
+            }
+          </h3>
+          <p class="text-gray-700 mb-3">
+            {
+              t(
+                "site.privacyPolicy.informationWeCollect.businessInfo.description",
+                locale
+              )
+            }
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>İşletme adı ve açıklaması</li>
+            <li>İletişim bilgileri (telefon, e-posta, adres)</li>
+            <li>İşletme kategorisi ve çalışma saatleri</li>
+            <li>Fotoğraflar ve diğer işletme ile ilgili içerik</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- How We Use -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:settings" class="w-6 h-6 text-primary-600" />
+          {t("site.privacyPolicy.howWeUse.title", locale)}
+        </h2>
+
+        <div class="bg-gray-50 rounded-lg p-6">
+          <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <li>İşletme listelerini kullanıcılara göstermek</li>
+            <li>
+              Web sitesi performansını ve kullanıcı deneyimini geliştirmek
+            </li>
+            <li>Kullanım kalıplarını ve popüler içeriği analiz etmek</li>
+            <li>İşletme bilgilerinin doğruluğunu teyit etmek</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Information Sharing -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:share" class="w-6 h-6 text-primary-600" />
+          {t("site.privacyPolicy.informationSharing.title", locale)}
+        </h2>
+
+        <div class="bg-orange-50 rounded-lg p-6">
+          <p class="text-gray-700 mb-3">
+            {t("site.privacyPolicy.informationSharing.description", locale)}
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <li>
+              İşletme bilgileri platformumuzda halka açık olarak görüntülenir
+            </li>
+            <li>Kanun veya yasal süreç gereği</li>
+            <li>
+              Web sitemizi işletmemize yardımcı olan hizmet sağlayıcılarıyla
+              (Cloudflare gibi)
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Data Retention -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:clock" class="w-6 h-6 text-primary-600" />
+          {t("site.privacyPolicy.dataRetention.title", locale)}
+        </h2>
+
+        <div class="bg-purple-50 rounded-lg p-6">
+          <p class="text-gray-700">
+            {t("site.privacyPolicy.dataRetention.description", locale)}
+          </p>
+        </div>
+      </section>
+
+      <!-- Your Rights -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:shield-check" class="w-6 h-6 text-primary-600" />
+          {t("site.privacyPolicy.yourRights.title", locale)}
+        </h2>
+
+        <div class="bg-blue-50 rounded-lg p-6">
+          <p class="text-gray-700 mb-3">
+            {t("site.privacyPolicy.yourRights.description", locale)}
+          </p>
+          <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <li>Kişisel verilerinize erişim</li>
+            <li>Yanlış bilgileri düzeltme</li>
+            <li>Verilerinizin silinmesini talep etme</li>
+            <li>Veri işlemeye itiraz etme</li>
+            <li>Veri taşınabilirliği</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Cookies -->
+      <section class="mb-8">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:cookie" class="w-6 h-6 text-primary-600" />
+          {t("site.privacyPolicy.cookies.title", locale)}
+        </h2>
+
+        <div class="bg-yellow-50 rounded-lg p-6">
+          <p class="text-gray-700">
+            {t("site.privacyPolicy.cookies.description", locale)}
+          </p>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="bg-primary-50 rounded-lg p-6">
+        <h2
+          class="text-2xl font-semibold text-black mb-4 flex items-center gap-2"
+        >
+          <Icon name="tabler:mail" class="w-6 h-6 text-primary-600" />
+          {t("site.privacyPolicy.contact.title", locale)}
+        </h2>
+        <p class="text-gray-700 mb-3">
+          {t("site.privacyPolicy.contact.description", locale)}
+        </p>
+        <div class="bg-white rounded-lg p-4">
+          <p class="text-gray-700">
+            E-posta: <a
+              href="mailto:iletisim@rehver.com"
+              class="text-primary-600 hover:text-primary-700"
+              >iletisim@rehver.com</a
+            >
+            <br />
+            Adres: Konya, Türkiye
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</MainLayout>

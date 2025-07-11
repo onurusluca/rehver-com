@@ -1,20 +1,27 @@
 {
   "name": "rehver-astro",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
-    "build:win": "set npm_config_node_linker=hoisted && pnpm build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "supabase:types": "npx supabase gen types --lang=typescript --project-id xngaipxdnpjswqofnpjr --schema public > ./src/types/database.types.ts"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.4.1",
-    "@astrojs/tailwind": "^6.0.2",
-    "@astrojs/vercel": "^8.2.1",
-    "@supabase/supabase-js": "^2.50.5",
-    "astro": "^5.11.0",
-    "tailwindcss": "^3.4.17"
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^5.1.2",
+    "@astrojs/vercel": "^8.0.0",
+    "@iconify-json/tabler": "^1.2.19",
+    "@supabase/supabase-js": "^2.39.3",
+    "astro": "^5.0.0",
+    "astro-icon": "^1.1.5",
+    "meilisearch": "^0.51.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.8.3"
   }
 }

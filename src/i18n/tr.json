@@ -1,0 +1,363 @@
+{
+  "common": {
+    "home": "Anasayfa",
+    "viewMore": "Daha Fazla Gör",
+    "city": "Şehir"
+  },
+  "home": {
+    "hero": {
+      "title": "Aradığını ve daha fazlasını ",
+      "highlight": "bul",
+      "subtitle": "Restoran, kafe, işletme ve hizmetleri keşfet",
+      "searchPlaceholder": "Ne arıyorsun? (telefon tamiri, kafe, pizza...)",
+      "searchButton": "Ara"
+    },
+    "discoverTopics": {
+      "title": "İlginizi Çekebilecek Konular"
+    },
+    "popularPlaces": {
+      "title": "Popüler Yerler"
+    },
+    "newestPlaces": {
+      "title": "Yeni Eklenenler"
+    },
+    "places": "işletme",
+    "seo": {
+      "title": "Rehver - Aradığını ve daha fazlasını bul!",
+      "description": "Türkiye'nin en kapsamlı yerel işletme rehberi. Restoran, kafe, mağaza ve hizmet veren işletmeleri keşfet, değerlendir ve iletişime geç.",
+      "keywords": "yerel işletme, restoran, kafe, mağaza, hizmet, Konya, Antalya, Türkiye"
+    }
+  },
+  "search": {
+    "title": "Arama",
+    "placeholder": "İşletme, kategori veya yer ara...",
+    "button": "Ara",
+    "foundResults": "\"{query}\" için {count} sonuç bulundu",
+    "noResultsFor": "\"{query}\" için sonuç bulunamadı",
+    "noResults": "Sonuç bulunamadı",
+    "noResultsDescription": "Farklı anahtar kelimeler deneyebilirsiniz",
+    "enterQuery": "Aramaya başlamak için yukarıya bir şeyler yazın",
+    "description": "İşletme, kategori ve yer arama",
+    "resultsFor": "\"{query}\" arama sonuçları",
+    "pagination": {
+      "previous": "Önceki",
+      "next": "Sonraki"
+    }
+  },
+  "header": {
+    "nav": {
+      "discover": "Keşfet",
+      "openMobileMenu": "Mobil Menüyü Aç"
+    }
+  },
+  "footer": {
+    "description": "Şehrinizdeki en iyi yerel işletmeleri keşfedin. Restoran, kafe, hizmet ve daha fazlasını bulun.",
+    "rights": "Tüm hakları saklıdır.",
+    "followUs": "Bizi takip edin",
+    "discover": {
+      "title": "Keşfet",
+      "home": "Ana Sayfa",
+      "discover": "Keşfet"
+    },
+    "company": {
+      "title": "Şirket",
+      "about": "Hakkımızda",
+      "contact": "İletişim",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Kullanım Şartları"
+    }
+  },
+  "discover": {
+    "title": "Keşfet",
+    "pageTitle": "Keşfet - Aradığını ve daha fazlasını bul",
+    "pageDescription": "Türkiye'deki en iyi yerleri keşfedin. Restoranlardan eğlence mekanlarına, ihtiyacınız olan her şeyi tek bir yerde bulun.",
+    "heroTitle": "Keşfetmeye Başla",
+    "heroDescription": "Şehrinizdeki en iyi yerleri, hizmetleri ve deneyimleri bulun",
+    "popularTopics": "Popüler Konular",
+    "topPlacesTitle": "En Popüler Yerler",
+    "newestPlacesTitle": "Yeni Eklenen Yerler",
+    "viewAll": "Tümünü Gör",
+    "places": "yer",
+    "featuredPlaces": "Öne Çıkan Yerler",
+    "showingPlaces": "{total} yerden {showing} tanesi gösteriliyor",
+    "noPlaces": "Henüz yer bulunamadı",
+    "noPlacesDescription": "Bu kategori için henüz yer eklenmemiş"
+  },
+  "place": {
+    "places": "Yerler",
+    "location": "Konum",
+    "reviews": "değerlendirme",
+    "photos": "Fotoğraflar",
+    "photo": "fotoğrafı",
+    "contactInfo": "İletişim Bilgileri",
+    "openingHours": "Çalışma Saatleri",
+    "call": "Ara",
+    "tags": "Etiketler",
+    "productsAndServices": "Ürünler ve Hizmetler",
+    "days": {
+      "monday": "Pazartesi",
+      "tuesday": "Salı",
+      "wednesday": "Çarşamba",
+      "thursday": "Perşembe",
+      "friday": "Cuma",
+      "saturday": "Cumartesi",
+      "sunday": "Pazar"
+    },
+    "closed": "Kapalı",
+    "actions": {
+      "openInGoogleMaps": "Google Maps'te Aç",
+      "openInAppleMaps": "Apple Haritalar'da Aç",
+      "openWebsite": "Web Sitesine Git"
+    },
+    "copy": {
+      "phone": "Telefon numarasını kopyala",
+      "address": "Adres bilgisini kopyala",
+      "website": "Web sitesini kopyala",
+      "email": "E-posta adresini kopyala"
+    }
+  },
+  "error": {
+    "404": {
+      "title": "Sayfa Bulunamadı",
+      "description": "Aradığınız sayfa mevcut değil veya taşınmış olabilir.",
+      "goHome": "Ana Sayfaya Dön",
+      "discover": "Keşfet"
+    }
+  },
+  "site": {
+    "aboutUs": {
+      "hero": {
+        "title": "Türkiye'nin En Kapsamlı İşletme Rehberi",
+        "subtitle": "Rehver ile şehrinizdeki en iyi yerel işletmeleri keşfedin. Restoran, kafe, hizmet ve daha fazlasını bulun."
+      },
+      "stats": {
+        "businesses": "İşletme",
+        "cities": "Şehir",
+        "users": "Kullanıcı",
+        "searches": "Arama"
+      },
+      "mission": {
+        "title": "Misyonumuz",
+        "description1": "Rehver, yerel işletmeleri desteklemek ve insanların şehirlerindeki en iyi mekanları keşfetmesine yardımcı olmak için kuruldu. Türkiye'nin her köşesindeki değerli işletmeleri kullanıcılarımızla buluşturuyoruz.",
+        "description2": "Günümüzde dijital dünyanın hızla geliştiği bu dönemde, yerel işletmelerin online varlıklarını güçlendirmek ve potansiyel müşterilerle buluşturmak için çalışıyoruz."
+      },
+      "values": {
+        "title": "Değerlerimiz",
+        "subtitle": "Rehver olarak bizi yönlendiren temel değerler ve ilkeler.",
+        "accuracy": {
+          "title": "Doğruluk",
+          "description": "Güncel ve doğru bilgileri kullanıcılarımızla paylaşmak için sürekli çalışıyoruz."
+        },
+        "community": {
+          "title": "Topluluk",
+          "description": "Yerel işletmeler ve kullanıcılar arasında güçlü bir topluluk oluşturmayı hedefliyoruz."
+        },
+        "innovation": {
+          "title": "Yenilik",
+          "description": "Teknoloji ve kullanıcı deneyiminde sürekli yenilik yaparak hizmetimizi geliştiriyoruz."
+        },
+        "trust": {
+          "title": "Güven",
+          "description": "Kullanıcılarımızın ve işletmelerin güvenini kazanmak için şeffaf ve güvenilir hizmet sunuyoruz."
+        }
+      },
+      "features": {
+        "title": "Özelliklerimiz",
+        "subtitle": "Rehver'in size sunduğu benzersiz özellikler ve avantajlar.",
+        "search": {
+          "title": "Gelişmiş Arama",
+          "description": "Kategori, konum ve özellik bazında detaylı arama yaparak istediğiniz işletmeyi kolayca bulun."
+        },
+        "discover": {
+          "title": "Keşfet",
+          "description": "Şehrinizdeki gizli cennetleri ve popüler mekanları keşfedin."
+        },
+        "information": {
+          "title": "Detaylı Bilgi",
+          "description": "Her işletme için adres, telefon, çalışma saatleri ve özellikler gibi kapsamlı bilgiler."
+        },
+        "mobile": {
+          "title": "Mobil Uyumlu",
+          "description": "Tüm cihazlarda mükemmel çalışan, hızlı ve kullanıcı dostu arayüz."
+        }
+      },
+      "vision": {
+        "title": "Vizyonumuz",
+        "description": "Türkiye'nin her şehrinde yerel ekonomiyi destekleyen, işletmeler ve müşteriler arasında köprü kuran dijital platform olmak.",
+        "goals": {
+          "nationwide": {
+            "title": "Türkiye Geneli",
+            "description": "81 ilde kapsamlı işletme rehberi sunmak"
+          },
+          "growth": {
+            "title": "Büyüme",
+            "description": "Yerel işletmelerin dijital büyümesine katkı sağlamak"
+          },
+          "community": {
+            "title": "Topluluk",
+            "description": "Güçlü yerel topluluklar oluşturmak"
+          }
+        }
+      },
+      "cta": {
+        "title": "Bizimle İletişime Geçin",
+        "description": "Sorularınız mı var? İşbirliği öneriniz mi? Sizden haber almaktan mutluluk duyarız!",
+        "contact": "İletişim",
+        "explore": "Keşfet"
+      },
+      "seo": {
+        "title": "Hakkımızda | Rehver",
+        "description": "Rehver ile şehrinizdeki en iyi yerel işletmeleri keşfedin. Restoran, kafe, hizmet ve daha fazlasını bulun."
+      }
+    },
+    "contactUs": {
+      "hero": {
+        "title": "Bizimle İletişime Geçin",
+        "subtitle": "Sorularınız, önerileriniz ve geri bildirimleriniz için bizimle iletişime geçin. Size yardımcı olmaktan mutluluk duyarız."
+      },
+      "reasons": {
+        "title": "Size Nasıl Yardımcı Olabiliriz?",
+        "subtitle": "İletişim kurmak istediğiniz konuyu seçin:",
+        "general": {
+          "title": "Genel Sorular",
+          "description": "Platform hakkında merak ettikleriniz"
+        },
+        "business": {
+          "title": "İşletme Ekleme",
+          "description": "İşletmenizi platforma eklemek için"
+        },
+        "technical": {
+          "title": "Teknik Destek",
+          "description": "Teknik sorunlar ve hata bildirimleri"
+        },
+        "partnership": {
+          "title": "İş Ortaklığı",
+          "description": "İş birliği ve ortaklık teklifleri"
+        }
+      },
+      "emailContact": {
+        "title": "E-posta İletişimi",
+        "description": "Sorularınız, önerileriniz ve geri bildirimleriniz için bizimle iletişime geçin."
+      },
+      "quickContact": {
+        "title": "Hızlı İletişim"
+      },
+      "info": {
+        "hours": {
+          "value": "Pazartesi - Cuma: 09:00 - 18:00"
+        },
+        "location": {
+          "value": "Türkiye"
+        }
+      },
+      "faq": {
+        "title": "Sık Sorulan Sorular",
+        "q1": {
+          "question": "Ne kadar sürede dönüş yaparsınız?",
+          "answer": "Genellikle 24 saat içinde tüm mesajlara yanıt veriyoruz. Acil durumlar için aynı gün içinde dönüş yapmaya çalışıyoruz."
+        },
+        "q2": {
+          "question": "İşletmemi nasıl ekleyebilirim?",
+          "answer": "İşletmenizi eklemek için bize e-posta gönderin. Gerekli bilgileri sizinle paylaşacağız ve süreci hızlandıracağız."
+        },
+        "q3": {
+          "question": "Hangi dillerde destek veriyorsunuz?",
+          "answer": "Şu anda Türkçe ve İngilizce dillerinde destek veriyoruz. Diğer diller için özel taleplerinizi değerlendirebiliriz."
+        }
+      },
+      "social": {
+        "title": "Sosyal Medya",
+        "description": "Güncel haberler ve duyurular için sosyal medya hesaplarımızı takip edin."
+      },
+      "seo": {
+        "title": "İletişim | Rehver",
+        "description": "Rehver ile iletişime geçin. Sorularınız, önerileriniz ve geri bildirimleriniz için bizimle iletişime geçin."
+      }
+    },
+    "privacyPolicy": {
+      "title": "Gizlilik Politikası",
+      "description": "Rehver, kullanıcıların yerel işletmeleri keşfetmesine yardımcı olan bir platformdur. Bu Gizlilik Politikası, kişisel verilerinizi nasıl topladığımızı, kullandığımızı ve koruduğumuzu açıklar.",
+      "lastUpdated": "Son güncelleme",
+      "informationWeCollect": {
+        "title": "Topladığımız Bilgiler",
+        "analyticsData": {
+          "title": "Analitik Verileri",
+          "description": "Web sitemizin nasıl kullanıldığını anlamak için Cloudflare Analytics kullanıyoruz."
+        },
+        "businessInfo": {
+          "title": "İşletme Bilgileri",
+          "description": "İşletmeler bilgilerini gönderdiğinde şunları topluyoruz:"
+        }
+      },
+      "howWeUse": {
+        "title": "Bilgileri Nasıl Kullanıyoruz"
+      },
+      "informationSharing": {
+        "title": "Bilgi Paylaşımı",
+        "description": "Kişisel bilgilerinizi üçüncü taraflarla satmaz, takas etmez veya paylaşmayız."
+      },
+      "dataRetention": {
+        "title": "Veri Saklama",
+        "description": "Analitik veriler Cloudflare tarafından kendi veri saklama politikasına göre saklanır."
+      },
+      "yourRights": {
+        "title": "Haklarınız",
+        "description": "GDPR ve Türk KVKK yasası altında şu haklara sahipsiniz:"
+      },
+      "cookies": {
+        "title": "Çerezler ve İzleme",
+        "description": "Web sitesi işlevselliği için gerekli çerezler kullanıyoruz."
+      },
+      "contact": {
+        "title": "İletişim",
+        "description": "Gizlilik ile ilgili sorularınız için bize ulaşın:"
+      }
+    },
+    "termsOfService": {
+      "title": "Kullanım Şartları",
+      "description": "Rehver platformunu kullanmadan önce lütfen bu şartları okuyun.",
+      "lastUpdated": "Son güncelleme",
+      "acceptance": {
+        "title": "Şartları Kabul Etme",
+        "description": "Rehver'i kullanarak bu şartları kabul etmiş olursunuz."
+      },
+      "serviceDescription": {
+        "title": "Hizmet Açıklaması",
+        "description": "Rehver, Türkiye'deki işletmeler hakkında bilgi görüntüleyen bir platformdur."
+      },
+      "dataAccuracy": {
+        "title": "Veri Doğruluğu Sorumluluk Reddi",
+        "warning": "ÖNEMLİ: İşletme bilgileri %100 güncel olmayabilir.",
+        "description": "İşletme bilgileri yalnızca bilgilendirme amaçlıdır.",
+        "advice": "Ziyaret etmeden önce doğrudan işletme ile doğrulayın."
+      },
+      "businessListings": {
+        "title": "İşletme Listeleri",
+        "submission": {
+          "title": "Gönderim",
+          "description": "İşletmeler bilgilerini gönderebilir."
+        },
+        "removal": {
+          "title": "Kaldırma Talepleri",
+          "description": "İşletme sahipleri listelerinin kaldırılmasını talep edebilir."
+        }
+      },
+      "liability": {
+        "title": "Sorumluluk Sınırlaması",
+        "disclaimer": "REHVER HİÇBİR GARANTİ VERMEKSİZİN SAĞLANIR."
+      },
+      "governingLaw": {
+        "title": "Geçerli Kanun",
+        "description": "Bu şartlar Türk hukukuna tabidir."
+      },
+      "changes": {
+        "title": "Şartlarda Değişiklik",
+        "description": "Bu şartları güncelleyebiliriz."
+      },
+      "contact": {
+        "title": "İletişim",
+        "description": "Sorularınız için bize ulaşın:"
+      }
+    }
+  }
+}

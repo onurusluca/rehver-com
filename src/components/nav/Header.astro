@@ -1,0 +1,119 @@
+---
+import { t, getLocaleFromUrl, localePath } from "@/utils/i18n";
+import SearchForm from "./SearchForm.astro";
+import { Icon } from "astro-icon/components";
+
+const locale = getLocaleFromUrl(Astro.url);
+const currentPath = Astro.url.pathname.replace(/^\/en/, "") || "/";
+
+const navItems = [
+  {
+    label: t("header.nav.discover", locale),
+    path: localePath("/discover", locale),
+  },
+];
+
+const otherLocale = locale === "tr" ? "en" : "tr";
+const switchUrl = locale === "tr" ? `/en${currentPath}` : currentPath;
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md shadow-lg transition-all duration-200"
+>
+  <div class="mx-auto max-w-7xl px-4">
+    <div class="flex items-center justify-between gap-6 py-3">
+      <!-- Logo -->
+      <a href={localePath("/", locale)} class="flex items-center gap-2">
+        <div
+          class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center"
+        >
+          <Icon name="tabler:map-pin" class="w-5 h-5 text-white" />
+        </div>
+        <span class="text-xl font-bold text-black">Rehver</span>
+      </a>
+
+      <!-- Desktop Search -->
+      <div class="hidden md:block flex-1 max-w-lg">
+        <SearchForm locale={locale} />
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center gap-4">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.path}
+              class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+
+        <!-- Language Switcher -->
+        <a
+          href={switchUrl}
+          class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+        >
+          <img
+            src={`/icons/${locale === "tr" ? "england" : "turkey"}-flag.svg`}
+            alt={otherLocale.toUpperCase()}
+            class="w-4 h-4"
+          />
+          {otherLocale.toUpperCase()}
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2 text-gray-600 hover:text-gray-900"
+        aria-label={t("header.nav.openMobileMenu", locale)}
+      >
+        <Icon name="tabler:menu-2" class="w-6 h-6" />
+      </button>
+    </div>
+
+    <!-- Mobile Search -->
+    <div class="md:hidden pb-3">
+      <SearchForm locale={locale} />
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+    <div class="px-4 py-3 space-y-2">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.path}
+            class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+
+      <a
+        href={switchUrl}
+        class="flex items-center gap-2 px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md"
+      >
+        <img
+          src={`/icons/${locale === "tr" ? "england" : "turkey"}-flag.svg`}
+          alt={otherLocale.toUpperCase()}
+          class="w-4 h-4"
+        />
+        {otherLocale.toUpperCase()}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const button = document.getElementById("mobile-menu-button");
+  const menu = document.getElementById("mobile-menu");
+
+  button?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+  });
+</script>

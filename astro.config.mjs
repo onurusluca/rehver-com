@@ -1,59 +1,34 @@
 import { defineConfig } from 'astro/config';
-import path from 'path';
-
 import tailwind from '@astrojs/tailwind';
-import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
+import sitemap from '@astrojs/sitemap';
+import icon from 'astro-icon';
 
 export default defineConfig({
     site: 'https://rehver.com',
     output: 'static',
     adapter: vercel({
-        imageService: true,
-        webAnalytics: {
-            enabled: true,
-        },
+        isr: true,
     }),
-    vite: {
-        resolve: {
-            alias: {
-                '@': path.resolve('./src')
-            }
-        }
-    },
     integrations: [
         tailwind(),
         sitemap({
+            customPages: ['https://rehver.com/sitemaps/'],
             i18n: {
                 defaultLocale: 'tr',
                 locales: {
                     tr: 'tr-TR',
                     en: 'en-US'
                 }
-            },
-            customPages: [
-                'https://rehver.com/',
-                'https://rehver.com/arama',
-                'https://rehver.com/hakkimizda',
-                'https://rehver.com/en',
-                'https://rehver.com/en/about-us'
-            ],
-            serialize(item) {
-                if (item.url.includes('/yerler/')) {
-                    item.changefreq = 'weekly';
-                    item.priority = 0.9;
-                }
-                return item;
             }
-        })
+        }),
+        icon()
     ],
-    image: {
-        domains: ['rehver.b-cdn.net'],
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'rehver.b-cdn.net'
-            }
-        ]
+    i18n: {
+        defaultLocale: 'tr',
+        locales: ['tr', 'en'],
+        routing: {
+            prefixDefaultLocale: false
+        }
     }
 });

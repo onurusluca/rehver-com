@@ -1,6 +1,5 @@
-import type { Database } from "@/types/database.types.js";
+import type { Database } from "./database.types";
 
-// DATABASE TYPES
 export type Place = Database["public"]["Tables"]["places"]["Row"];
 export type SeoPage = Database["public"]["Tables"]["seo_pages"]["Row"];
 

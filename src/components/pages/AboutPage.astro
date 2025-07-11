@@ -1,0 +1,265 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { t } from "@/utils/i18n";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  locale: "tr" | "en";
+}
+
+const { locale } = Astro.props;
+
+const pageTitle = t("site.aboutUs.seo.title", locale);
+const pageDescription = t("site.aboutUs.seo.description", locale);
+
+const stats = [
+  {
+    value: "50K+",
+    label: t("site.aboutUs.stats.businesses", locale),
+    icon: "tabler:building-store",
+  },
+  {
+    value: "81",
+    label: t("site.aboutUs.stats.cities", locale),
+    icon: "tabler:map-pin",
+  },
+  {
+    value: "100K+",
+    label: t("site.aboutUs.stats.users", locale),
+    icon: "tabler:users",
+  },
+  {
+    value: "1M+",
+    label: t("site.aboutUs.stats.searches", locale),
+    icon: "tabler:search",
+  },
+];
+
+const values = [
+  {
+    title: t("site.aboutUs.values.accuracy.title", locale),
+    description: t("site.aboutUs.values.accuracy.description", locale),
+    icon: "tabler:check-circle",
+  },
+  {
+    title: t("site.aboutUs.values.community.title", locale),
+    description: t("site.aboutUs.values.community.description", locale),
+    icon: "tabler:users",
+  },
+  {
+    title: t("site.aboutUs.values.innovation.title", locale),
+    description: t("site.aboutUs.values.innovation.description", locale),
+    icon: "tabler:rocket",
+  },
+  {
+    title: t("site.aboutUs.values.trust.title", locale),
+    description: t("site.aboutUs.values.trust.description", locale),
+    icon: "tabler:shield-check",
+  },
+];
+
+const features = [
+  {
+    title: t("site.aboutUs.features.search.title", locale),
+    description: t("site.aboutUs.features.search.description", locale),
+    icon: "tabler:search",
+  },
+  {
+    title: t("site.aboutUs.features.discover.title", locale),
+    description: t("site.aboutUs.features.discover.description", locale),
+    icon: "tabler:compass",
+  },
+  {
+    title: t("site.aboutUs.features.information.title", locale),
+    description: t("site.aboutUs.features.information.description", locale),
+    icon: "tabler:info-circle",
+  },
+  {
+    title: t("site.aboutUs.features.mobile.title", locale),
+    description: t("site.aboutUs.features.mobile.description", locale),
+    icon: "tabler:device-mobile",
+  },
+];
+---
+
+<MainLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="text-center mb-16">
+    <h1 class="text-4xl font-bold text-black mb-4">
+      {t("site.aboutUs.hero.title", locale)}
+    </h1>
+    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      {t("site.aboutUs.hero.subtitle", locale)}
+    </p>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="mb-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {
+        stats.map((stat) => (
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-full flex items-center justify-center">
+              <Icon name={stat.icon} class="w-8 h-8 text-primary-600" />
+            </div>
+            <div class="text-3xl font-bold text-black mb-2">{stat.value}</div>
+            <div class="text-gray-600">{stat.label}</div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mb-16">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-black mb-6">
+        {t("site.aboutUs.mission.title", locale)}
+      </h2>
+      <div class="space-y-4 text-lg text-gray-700 leading-relaxed">
+        <p>{t("site.aboutUs.mission.description1", locale)}</p>
+        <p>{t("site.aboutUs.mission.description2", locale)}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="mb-16">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-black mb-4">
+        {t("site.aboutUs.values.title", locale)}
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        {t("site.aboutUs.values.subtitle", locale)}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        values.map((value) => (
+          <div class="bg-white rounded-lg border border-gray-200 p-6 text-center">
+            <div class="w-12 h-12 mx-auto mb-4 bg-primary-100 rounded-lg flex items-center justify-center">
+              <Icon name={value.icon} class="w-6 h-6 text-primary-600" />
+            </div>
+            <h3 class="text-lg font-semibold text-black mb-3">{value.title}</h3>
+            <p class="text-gray-600 text-sm">{value.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="mb-16">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-black mb-4">
+        {t("site.aboutUs.features.title", locale)}
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        {t("site.aboutUs.features.subtitle", locale)}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      {
+        features.map((feature) => (
+          <div class="flex gap-4">
+            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Icon name={feature.icon} class="w-6 h-6 text-primary-600" />
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-black mb-2">
+                {feature.title}
+              </h3>
+              <p class="text-gray-600">{feature.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Vision Section -->
+  <section class="bg-primary-50 rounded-2xl p-8 md:p-12 mb-16">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-black mb-4">
+        {t("site.aboutUs.vision.title", locale)}
+      </h2>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+        {t("site.aboutUs.vision.description", locale)}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="text-center">
+        <div
+          class="w-16 h-16 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center"
+        >
+          <Icon name="tabler:map" class="w-8 h-8 text-white" />
+        </div>
+        <h3 class="text-lg font-semibold text-black mb-2">
+          {t("site.aboutUs.vision.goals.nationwide.title", locale)}
+        </h3>
+        <p class="text-gray-600 text-sm">
+          {t("site.aboutUs.vision.goals.nationwide.description", locale)}
+        </p>
+      </div>
+
+      <div class="text-center">
+        <div
+          class="w-16 h-16 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center"
+        >
+          <Icon name="tabler:trending-up" class="w-8 h-8 text-white" />
+        </div>
+        <h3 class="text-lg font-semibold text-black mb-2">
+          {t("site.aboutUs.vision.goals.growth.title", locale)}
+        </h3>
+        <p class="text-gray-600 text-sm">
+          {t("site.aboutUs.vision.goals.growth.description", locale)}
+        </p>
+      </div>
+
+      <div class="text-center">
+        <div
+          class="w-16 h-16 mx-auto mb-4 bg-primary-500 rounded-full flex items-center justify-center"
+        >
+          <Icon name="tabler:users" class="w-8 h-8 text-white" />
+        </div>
+        <h3 class="text-lg font-semibold text-black mb-2">
+          {t("site.aboutUs.vision.goals.community.title", locale)}
+        </h3>
+        <p class="text-gray-600 text-sm">
+          {t("site.aboutUs.vision.goals.community.description", locale)}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="text-center">
+    <h2 class="text-3xl font-bold text-black mb-4">
+      {t("site.aboutUs.cta.title", locale)}
+    </h2>
+    <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+      {t("site.aboutUs.cta.description", locale)}
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a
+        href={`${locale === "en" ? "/en" : ""}/contact`}
+        class="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg transition-colors"
+      >
+        <Icon name="tabler:mail" class="w-4 h-4" />
+        {t("site.aboutUs.cta.contact", locale)}
+      </a>
+
+      <a
+        href={`${locale === "en" ? "/en" : ""}/discover`}
+        class="inline-flex items-center gap-2 border border-primary-500 text-primary-600 hover:bg-primary-50 px-6 py-3 rounded-lg transition-colors"
+      >
+        <Icon name="tabler:compass" class="w-4 h-4" />
+        {t("site.aboutUs.cta.explore", locale)}
+      </a>
+    </div>
+  </section>
+</MainLayout>
