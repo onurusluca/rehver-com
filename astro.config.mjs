@@ -6,7 +6,7 @@ import icon from 'astro-icon';
 
 export default defineConfig({
     site: 'https://rehver.com',
-    output: 'static',
+    output: 'server',
     adapter: vercel({
         isr: true,
     }),

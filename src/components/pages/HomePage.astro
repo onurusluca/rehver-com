@@ -86,7 +86,7 @@ const pageDescription = t("home.seo.description", locale);
               const slug = locale === "tr" ? page.slug_tr : page.slug_en;
               return (
                 <a
-                  href={`${locale === "en" ? "/en" : ""}/discover/${slug}`}
+                  href={`${locale === "en" ? "/en/discover" : "/kesfet"}/${slug}`}
                   class="group rounded-lg bg-white p-4 shadow-sm transition-all hover:shadow-md border border-gray-200"
                 >
                   <div class="flex items-center gap-4">

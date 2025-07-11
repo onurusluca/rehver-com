@@ -1,6 +1,6 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import SearchForm from "@/components/nav/SearchForm.astro";
+import SearchForm from "@/components/SearchForm.astro";
 import PlaceCard from "@/components/PlaceCard.astro";
 import { t } from "@/utils/i18n";
 import { searchClient } from "@/utils/meilisearch";
@@ -59,13 +59,16 @@ if (query) {
         .range(offset, offset + limit - 1);
       
       searchResults = places || [];
-      totalHits = places?.length || 0;
-      error = "";
+      totalHits = searchResults.length; // Just use the actual results length
+      error = "Using fallback search";
     } catch (fallbackErr) {
       console.error("Fallback search error:", fallbackErr);
     }
   }
 }
+
+// Always use the actual results length for display
+const actualResultsCount = searchResults.length;
 
 const pageTitle = query 
   ? t("search.resultsFor", locale, { query })
@@ -90,8 +93,8 @@ const totalPages = Math.ceil(totalHits / limit);
         <!-- Results Header -->
         <div class="mb-6">
           <p class="text-gray-600">
-            {totalHits > 0 
-              ? t("search.foundResults", locale, { count: totalHits, query })
+            {actualResultsCount > 0 
+              ? t("search.foundResults", locale, { count: actualResultsCount, query })
               : t("search.noResultsFor", locale, { query })
             }
           </p>
@@ -102,12 +105,12 @@ const totalPages = Math.ceil(totalHits / limit);
           )}
           {error && (
             <p class="text-sm text-red-600 mt-1">
-              {error} - Using fallback search
+              {error}
             </p>
           )}
         </div>
 
-        {searchResults.length > 0 ? (
+        {actualResultsCount > 0 ? (
           <div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
               {searchResults.map((place) => (
