@@ -1,16 +1,12 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
     site: 'https://rehver.com',
     output: 'server',
-    adapter: vercel({
-        webAnalytics: {
-            enabled: true
-        }
-    }),
+    adapter: vercel(),
     integrations: [
         tailwind(),
         sitemap({
@@ -45,13 +41,5 @@ export default defineConfig({
                 hostname: 'rehver.b-cdn.net'
             }
         ]
-    },
-    vite: {
-        define: {
-            // Fix the environment variable security warning
-            'import.meta.env.PUBLIC_SUPABASE_URL': JSON.stringify(process.env.PUBLIC_SUPABASE_URL),
-            'import.meta.env.PUBLIC_SUPABASE_ANON_KEY': JSON.stringify(process.env.PUBLIC_SUPABASE_ANON_KEY),
-            'import.meta.env.SUPABASE_SERVICE_KEY': JSON.stringify(process.env.SUPABASE_SERVICE_KEY)
-        }
     }
 });

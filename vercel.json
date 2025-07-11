@@ -1,9 +1,8 @@
 {
     "buildCommand": "pnpm build",
-    "outputDirectory": "dist",
     "framework": "astro",
     "functions": {
-        "src/pages/api/search.ts": {
+        ".vercel/output/functions/_render.func/index.js": {
             "maxDuration": 30
         }
     }
