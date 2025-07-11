@@ -8,7 +8,12 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
     site: 'https://rehver.com',
     output: 'static',
-    // adapter: vercel(),
+    adapter: vercel({
+        imageService: true,
+        webAnalytics: {
+            enabled: true,
+        },
+    }),
     vite: {
         resolve: {
             alias: {
