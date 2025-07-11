@@ -8,7 +8,7 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
     site: 'https://rehver.com',
     output: 'static',
-    adapter: vercel(),
+    // adapter: vercel(),
     vite: {
         resolve: {
             alias: {
