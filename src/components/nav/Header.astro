@@ -1,36 +1,29 @@
 ---
-import { t, getLocaleFromUrl, localePath } from "@/utils/i18n";
-import SearchForm from "@/components/SearchForm.astro";
+import { t, getLocaleFromUrl } from "@/utils/i18n";
 import { Icon } from "astro-icon/components";
 
+import SearchForm from "@/components/SearchForm.astro";
+import LangSwitcher from "@/components/nav/LangSwitcher.astro";
+import Logo from "@/components/Logo.astro";
+
 const locale = getLocaleFromUrl(Astro.url);
-const currentPath = Astro.url.pathname.replace(/^\/en/, "") || "/";
 
 const navItems = [
   {
     label: t("header.nav.discover", locale),
-    path: localePath("/discover", locale),
+    path: locale === "en" ? "/en/discover" : "/kesfet",
   },
 ];
-
-const otherLocale = locale === "tr" ? "en" : "tr";
-const switchUrl = locale === "tr" ? `/en${currentPath}` : currentPath;
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md shadow-lg transition-all duration-200"
+  id="header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-200 ease-out bg-white py-2 border-b"
 >
   <div class="mx-auto max-w-7xl px-4">
-    <div class="flex items-center justify-between gap-6 py-3">
+    <div class="flex items-center justify-between gap-6">
       <!-- Logo -->
-      <a href={localePath("/", locale)} class="flex items-center gap-2">
-        <div
-          class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center"
-        >
-          <Icon name="tabler:map-pin" class="w-5 h-5 text-white" />
-        </div>
-        <span class="text-xl font-bold text-black">Rehver</span>
-      </a>
+      <Logo locale={locale} />
 
       <!-- Desktop Search -->
       <div class="hidden md:block flex-1 max-w-lg">
@@ -43,7 +36,7 @@ const switchUrl = locale === "tr" ? `/en${currentPath}` : currentPath;
           navItems.map((item) => (
             <a
               href={item.path}
-              class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors"
+              class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors rounded-lg"
             >
               {item.label}
             </a>
@@ -51,69 +44,188 @@ const switchUrl = locale === "tr" ? `/en${currentPath}` : currentPath;
         }
 
         <!-- Language Switcher -->
-        <a
-          href={switchUrl}
-          class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
-        >
-          <img
-            src={`/icons/${locale === "tr" ? "england" : "turkey"}-flag.svg`}
-            alt={otherLocale.toUpperCase()}
-            class="w-4 h-4"
-          />
-          {otherLocale.toUpperCase()}
-        </a>
+        <LangSwitcher />
       </nav>
 
-      <!-- Mobile Menu Button -->
+      <!-- Mobile Buttons -->
+      <div class="flex items-center gap-2">
+        <button
+          id="mobile-search-button"
+          class="md:hidden p-2 text-gray-600 hover:text-gray-900 border border-gray-300 rounded-lg"
+          aria-label={t("search.title", locale)}
+        >
+          <Icon name="tabler:search" class="w-5 h-5" />
+        </button>
+
+        <button
+          id="mobile-menu-button"
+          class="md:hidden p-2 text-gray-600 hover:text-gray-900"
+          aria-label={t("header.nav.openMobileMenu", locale)}
+        >
+          <Icon name="tabler:menu-2" class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Search Modal -->
+  <div id="mobile-search-modal" class="hidden fixed inset-0 z-[60] bg-white">
+    <div class="flex items-center justify-between p-4 border-b">
+      <h1 class="text-lg font-bold">{t("search.title", locale)}</h1>
       <button
-        id="mobile-menu-button"
-        class="md:hidden p-2 text-gray-600 hover:text-gray-900"
-        aria-label={t("header.nav.openMobileMenu", locale)}
+        id="close-search-modal"
+        class="p-2 text-gray-600 hover:text-gray-900"
+        aria-label={t("header.nav.closeSearchModal", locale)}
       >
-        <Icon name="tabler:menu-2" class="w-6 h-6" />
+        <Icon name="tabler:x" class="w-6 h-6" />
       </button>
     </div>
-
-    <!-- Mobile Search -->
-    <div class="md:hidden pb-3">
+    <div class="p-4">
       <SearchForm locale={locale} />
     </div>
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-white border-t max-w-xs fixed right-0 top-0 h-full z-[60] shadow-lg"
+  >
+    <div class="flex items-center justify-between p-4 border-b">
+      <h1 class="text-lg font-bold">{t("header.menu", locale)}</h1>
+      <button
+        id="close-mobile-menu"
+        class="p-2 text-gray-600 hover:text-gray-900"
+        aria-label={t("header.nav.closeMobileMenu", locale)}
+      >
+        <Icon name="tabler:x" class="w-6 h-6" />
+      </button>
+    </div>
     <div class="px-4 py-3 space-y-2">
       {
         navItems.map((item) => (
           <a
             href={item.path}
-            class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
+            class="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md mobile-menu-link"
           >
             {item.label}
           </a>
         ))
       }
-
-      <a
-        href={switchUrl}
-        class="flex items-center gap-2 px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-md"
-      >
-        <img
-          src={`/icons/${locale === "tr" ? "england" : "turkey"}-flag.svg`}
-          alt={otherLocale.toUpperCase()}
-          class="w-4 h-4"
-        />
-        {otherLocale.toUpperCase()}
-      </a>
+      <LangSwitcher />
     </div>
   </div>
 </header>
 
 <script>
-  const button = document.getElementById("mobile-menu-button");
-  const menu = document.getElementById("mobile-menu");
+  // Header scroll behavior
+  let isSticky = false;
+  let isVisible = true;
+  let lastScrollY = 0;
+  const SCROLL_THRESHOLD = 50;
+  let ticking = false;
 
-  button?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
+  const header = document.getElementById("header");
+
+  const handleScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        const diff = Math.abs(currentScrollY - lastScrollY);
+
+        if (diff > 5) {
+          const newIsSticky = currentScrollY > SCROLL_THRESHOLD;
+          const newIsVisible =
+            currentScrollY < SCROLL_THRESHOLD || currentScrollY < lastScrollY;
+
+          if (newIsSticky !== isSticky) {
+            isSticky = newIsSticky;
+            if (isSticky) {
+              header?.classList.add(
+                "shadow-lg",
+                "backdrop-blur-md",
+                "bg-white/70"
+              );
+              header?.classList.remove("bg-white", "border-b");
+            } else {
+              header?.classList.remove(
+                "shadow-lg",
+                "backdrop-blur-md",
+                "bg-white/70"
+              );
+              header?.classList.add("bg-white", "border-b");
+            }
+          }
+
+          if (newIsVisible !== isVisible) {
+            isVisible = newIsVisible;
+            if (isVisible) {
+              header?.classList.remove("-translate-y-full", "opacity-0");
+            } else {
+              header?.classList.add("-translate-y-full", "opacity-0");
+            }
+          }
+
+          lastScrollY = currentScrollY;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  // Mobile menu functionality
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const closeMobileMenu = document.getElementById("close-mobile-menu");
+  const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+
+  const openMobileMenu = () => {
+    mobileMenu?.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeMobileMenuHandler = () => {
+    mobileMenu?.classList.add("hidden");
+    document.body.style.overflow = "";
+  };
+
+  mobileMenuButton?.addEventListener("click", openMobileMenu);
+  closeMobileMenu?.addEventListener("click", closeMobileMenuHandler);
+  mobileMenuLinks.forEach((link) => {
+    link.addEventListener("click", closeMobileMenuHandler);
   });
+
+  // Mobile search modal functionality
+  const mobileSearchButton = document.getElementById("mobile-search-button");
+  const mobileSearchModal = document.getElementById("mobile-search-modal");
+  const closeSearchModal = document.getElementById("close-search-modal");
+
+  const openSearchModal = () => {
+    mobileSearchModal?.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    // Focus on search input
+    const searchInput = mobileSearchModal?.querySelector(
+      'input[type="search"]'
+    ) as HTMLInputElement;
+    setTimeout(() => searchInput?.focus(), 100);
+  };
+
+  const closeSearchModalHandler = () => {
+    mobileSearchModal?.classList.add("hidden");
+    document.body.style.overflow = "";
+  };
+
+  mobileSearchButton?.addEventListener("click", openSearchModal);
+  closeSearchModal?.addEventListener("click", closeSearchModalHandler);
+
+  // Close modals on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeMobileMenuHandler();
+      closeSearchModalHandler();
+    }
+  });
+
+  // Initialize scroll listener
+  window.addEventListener("scroll", handleScroll, { passive: true });
 </script>

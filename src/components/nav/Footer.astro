@@ -2,6 +2,9 @@
 import { t } from "@/utils/i18n";
 import { Icon } from "astro-icon/components";
 
+import LangSwitcher from "@/components/nav/LangSwitcher.astro";
+import Logo from "@/components/Logo.astro";
+
 interface Props {
   locale: "tr" | "en";
 }
@@ -68,17 +71,7 @@ const switchUrl = locale === "tr" ? `/en${currentPath}` : currentPath;
       <!-- Brand Section -->
       <div class="lg:col-span-4">
         <div class="space-y-6">
-          <a
-            href={locale === "en" ? "/en" : "/"}
-            class="flex items-center gap-2"
-          >
-            <div
-              class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center"
-            >
-              <Icon name="tabler:map-pin" class="w-5 h-5 text-white" />
-            </div>
-            <span class="text-xl font-bold text-black">Rehver</span>
-          </a>
+          <Logo locale={locale} />
 
           <p class="max-w-md leading-relaxed text-gray-600">
             {t("footer.description", locale)}
@@ -104,18 +97,7 @@ const switchUrl = locale === "tr" ? `/en${currentPath}` : currentPath;
             <div class="h-6 w-px bg-gray-300"></div>
 
             <!-- Language Switcher -->
-            <a
-              href={switchUrl}
-              class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600
-            hover:bg-gray-100 rounded-md transition-colors"
-            >
-              <img
-                src={`/icons/${locale === "tr" ? "england" : "turkey"}-flag.svg`}
-                alt={otherLocale.toUpperCase()}
-                class="w-4 h-4"
-              />
-              {otherLocale.toUpperCase()}
-            </a>
+            <LangSwitcher />
           </div>
         </div>
       </div>

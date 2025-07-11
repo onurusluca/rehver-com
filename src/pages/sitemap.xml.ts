@@ -7,7 +7,6 @@ const BASE_URL = "https://rehver-com.vercel.app";
 const ITEMS_PER_PAGE = 500;
 
 export const GET: APIRoute = async () => {
-  // CORRECTED: Fetching counts from 'places' and 'seo_pages'
   const [placesResult, seoPagesResult] = await Promise.all([
     supabaseServer.from("places").select("*", { count: "exact", head: true }),
     supabaseServer

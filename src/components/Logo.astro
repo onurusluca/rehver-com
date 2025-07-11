@@ -1,0 +1,15 @@
+---
+interface Props {
+  locale: string;
+  class?: string;
+}
+
+const { locale, class: className = "" } = Astro.props;
+---
+
+<a
+  href={locale === "en" ? "/en" : "/"}
+  class={`flex items-center gap-2 flex-shrink-0 ${className}`}
+>
+  <img src="/logo.png" alt="Rehver" class="h-8" />
+</a>

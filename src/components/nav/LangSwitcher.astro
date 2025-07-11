@@ -1,0 +1,125 @@
+---
+import { t, getLocaleFromUrl } from "@/utils/i18n";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  mobile?: boolean;
+}
+
+const { mobile = false } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const currentPath = Astro.url.pathname.replace(/^\/en/, "") || "/";
+
+const languages = [
+  {
+    code: "tr",
+    name: "Türkçe",
+    flag: "turkey",
+    url: currentPath,
+  },
+  {
+    code: "en",
+    name: "English",
+    flag: "england",
+    url: `/en${currentPath}`,
+  },
+];
+
+const currentLang = languages.find((lang) => lang.code === locale);
+const otherLangs = languages.filter((lang) => lang.code !== locale);
+---
+
+<div class={`relative group ${mobile ? "w-full" : ""}`}>
+  <button
+    class={`flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-md transition-colors ${mobile ? "w-full justify-start" : ""}`}
+    aria-label={t("header.nav.selectLanguage", locale)}
+    data-dropdown-toggle="language-dropdown"
+  >
+    <img
+      src={`/icons/${currentLang?.flag}-flag.svg`}
+      alt={currentLang?.code.toUpperCase()}
+      class="w-4 h-4"
+    />
+    <span>{currentLang?.code.toUpperCase()}</span>
+    <Icon
+      name="tabler:chevron-down"
+      class="w-4 h-4 transition-transform group-hover:rotate-180"
+    />
+  </button>
+
+  <!-- Dropdown -->
+  <div
+    id="language-dropdown"
+    class={`absolute ${mobile ? "left-0 top-full mt-1" : "right-0 top-full mt-1"} w-40 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50`}
+  >
+    <div class="py-1">
+      {
+        otherLangs.map((lang) => (
+          <a
+            href={lang.url}
+            class="flex items-center gap-3 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            <img
+              src={`/icons/${lang.flag}-flag.svg`}
+              alt={lang.code.toUpperCase()}
+              class="w-4 h-4"
+            />
+            <span>{lang.name}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  // Enhanced dropdown functionality
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdowns = document.querySelectorAll("[data-dropdown-toggle]");
+
+    dropdowns.forEach((button) => {
+      const dropdown = document.getElementById(
+        button.getAttribute("data-dropdown-toggle")!
+      );
+      const parent = button.closest(".group");
+
+      if (!dropdown || !parent) return;
+
+      let hideTimeout: NodeJS.Timeout;
+
+      const showDropdown = () => {
+        clearTimeout(hideTimeout);
+        dropdown.classList.remove("opacity-0", "invisible");
+        dropdown.classList.add("opacity-100", "visible");
+      };
+
+      const hideDropdown = () => {
+        hideTimeout = setTimeout(() => {
+          dropdown.classList.add("opacity-0", "invisible");
+          dropdown.classList.remove("opacity-100", "visible");
+        }, 150);
+      };
+
+      // Show on hover
+      parent.addEventListener("mouseenter", showDropdown);
+      parent.addEventListener("mouseleave", hideDropdown);
+
+      // Show on click for mobile
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (dropdown.classList.contains("opacity-0")) {
+          showDropdown();
+        } else {
+          hideDropdown();
+        }
+      });
+
+      // Hide when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!parent.contains(e.target as Node)) {
+          hideDropdown();
+        }
+      });
+    });
+  });
+</script>
