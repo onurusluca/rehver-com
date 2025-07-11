@@ -1,12 +1,21 @@
 import { defineConfig } from 'astro/config';
+import path from 'path';
+
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
     site: 'https://rehver.com',
     output: 'server',
     adapter: vercel(),
+    vite: {
+        resolve: {
+            alias: {
+                '@': path.resolve('./src')
+            }
+        }
+    },
     integrations: [
         tailwind(),
         sitemap({

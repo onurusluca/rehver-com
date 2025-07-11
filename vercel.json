@@ -1,9 +1,0 @@
-{
-    "buildCommand": "pnpm build",
-    "framework": "astro",
-    "functions": {
-        ".vercel/output/functions/_render.func/index.js": {
-            "maxDuration": 30
-        }
-    }
-}

@@ -12,7 +12,7 @@ const ACTION_QUERY_PARAMS$1 = {
   actionName: "_action"};
 const ACTION_RPC_ROUTE_PATTERN = "/_actions/[...path]";
 
-const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_MEILISEARCH_SEARCH_KEY": "0b225f8a55668a5ac089b46352c7d9db1bf9f451bacff259d1a4414ba8bb0c57", "PUBLIC_MEILISEARCH_URL": "https://rehver-meilisearch.fly.dev", "PUBLIC_OPENROUTER_API_KEY": "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", "PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhuZ2FpcHhkbnBqc3dxb2ZucGpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk3OTcxMzAsImV4cCI6MjA2NTM3MzEzMH0.g1V9H_Kr3musiHJVoU-H4P0YeJlhRoJ1h4TzaHCi5d8", "PUBLIC_SUPABASE_URL": "https://xngaipxdnpjswqofnpjr.supabase.co", "SITE": "https://rehver.com", "SSR": true};
+const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "PUBLIC_MEILISEARCH_SEARCH_KEY": "0b225f8a55668a5ac089b46352c7d9db1bf9f451bacff259d1a4414ba8bb0c57", "PUBLIC_MEILISEARCH_URL": "https://rehver-meilisearch.fly.dev", "PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhuZ2FpcHhkbnBqc3dxb2ZucGpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk3OTcxMzAsImV4cCI6MjA2NTM3MzEzMH0.g1V9H_Kr3musiHJVoU-H4P0YeJlhRoJ1h4TzaHCi5d8", "PUBLIC_SUPABASE_URL": "https://xngaipxdnpjswqofnpjr.supabase.co", "SITE": "https://rehver.com", "SSR": true};
 const ACTION_QUERY_PARAMS = ACTION_QUERY_PARAMS$1;
 const codeToStatusMap = {
   // Implemented from IANA HTTP Status Code Registry
