@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel';
-import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 
 export default defineConfig({
@@ -12,16 +11,6 @@ export default defineConfig({
     }),
     integrations: [
         tailwind(),
-        sitemap({
-            customPages: ['https://rehver.com/sitemaps/'],
-            i18n: {
-                defaultLocale: 'tr',
-                locales: {
-                    tr: 'tr-TR',
-                    en: 'en-US'
-                }
-            }
-        }),
         icon()
     ],
     i18n: {

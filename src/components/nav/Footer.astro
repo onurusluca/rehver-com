@@ -104,91 +104,93 @@ const switchUrl = locale === "tr" ? `/en${currentPath}` : currentPath;
             <div class="h-6 w-px bg-gray-300"></div>
 
             <!-- Language Switcher -->
+            <a
+              href={switchUrl}
+              class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600
+            hover:bg-gray-100 rounded-md transition-colors"
+            >
+              <img
+                src={`/icons/${locale === "tr" ? "england" : "turkey"}-flag.svg`}
+                alt={otherLocale.toUpperCase()}
+                class="w-4 h-4"
+              />
+              {otherLocale.toUpperCase()}
+            </a>
+          </div>
+        </div>
+      </div>
 
-            href={switchUrl}
-            class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-600
-            hover:bg-gray-100 rounded-md transition-colors" >
-            <img
-              src={`/icons/${locale === "tr" ? "england" : "turkey"}-flag.svg`}
-              alt={otherLocale.toUpperCase()}
-              class="w-4 h-4"
-            />
-            {otherLocale.toUpperCase()}
+      <!-- Footer Links -->
+      <div class="lg:col-span-8">
+        <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
+          <div class="space-y-4">
+            <h3
+              class="text-xs font-semibold uppercase tracking-wider text-gray-900 whitespace-nowrap"
+            >
+              {footerLinks.discover.title}
+            </h3>
+            <ul class="space-y-3">
+              {
+                footerLinks.discover.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.path}
+                      class="text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="space-y-4">
+            <h3
+              class="text-xs font-semibold uppercase tracking-wider text-gray-900 whitespace-nowrap"
+            >
+              {footerLinks.company.title}
+            </h3>
+            <ul class="space-y-3">
+              {
+                footerLinks.company.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.path}
+                      class="text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Footer Links -->
-    <div class="lg:col-span-8">
-      <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4">
-        <div class="space-y-4">
-          <h3
-            class="text-xs font-semibold uppercase tracking-wider text-gray-900 whitespace-nowrap"
+    <!-- Bottom Section -->
+    <div class="mt-12 pt-8 border-t border-primary-100">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-gray-500">
+          © {new Date().getFullYear()} Rehver. {t("footer.rights", locale)}
+        </p>
+        <div class="flex items-center gap-6 text-xs">
+          <a
+            href={locale === "en" ? "/en/privacy" : "/privacy"}
+            class="text-gray-500 hover:text-primary-600 transition-colors"
           >
-            {footerLinks.discover.title}
-          </h3>
-          <ul class="space-y-3">
-            {
-              footerLinks.discover.links.map((link) => (
-                <li>
-                  <a
-                    href={link.path}
-                    class="text-sm text-gray-600 hover:text-primary-600 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div class="space-y-4">
-          <h3
-            class="text-xs font-semibold uppercase tracking-wider text-gray-900 whitespace-nowrap"
+            {t("footer.company.privacy", locale)}
+          </a>
+          <span class="text-gray-300">•</span>
+          <a
+            href={locale === "en" ? "/en/terms" : "/terms"}
+            class="text-gray-500 hover:text-primary-600 transition-colors"
           >
-            {footerLinks.company.title}
-          </h3>
-          <ul class="space-y-3">
-            {
-              footerLinks.company.links.map((link) => (
-                <li>
-                  <a
-                    href={link.path}
-                    class="text-sm text-gray-600 hover:text-primary-600 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
+            {t("footer.company.terms", locale)}
+          </a>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bottom Section -->
-  <div class="mt-12 pt-8 border-t border-primary-100">
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-xs text-gray-500">
-        © {new Date().getFullYear()} Rehver. {t("footer.rights", locale)}
-      </p>
-      <div class="flex items-center gap-6 text-xs">
-        <a
-          href={locale === "en" ? "/en/privacy" : "/privacy"}
-          class="text-gray-500 hover:text-primary-600 transition-colors"
-        >
-          {t("footer.company.privacy", locale)}
-        </a>
-        <span class="text-gray-300">•</span>
-        <a
-          href={locale === "en" ? "/en/terms" : "/terms"}
-          class="text-gray-500 hover:text-primary-600 transition-colors"
-        >
-          {t("footer.company.terms", locale)}
-        </a>
       </div>
     </div>
   </div>

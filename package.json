@@ -10,7 +10,6 @@
     "supabase:types": "npx supabase gen types --lang=typescript --project-id xngaipxdnpjswqofnpjr --schema public > ./src/types/database.types.ts"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.2",
     "@astrojs/vercel": "^8.0.0",
     "@iconify-json/tabler": "^1.2.19",
