@@ -3,12 +3,14 @@ import path from 'path';
 
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
     site: 'https://rehver.com',
-    output: 'server',
-    adapter: vercel(),
+    output: 'static',
+    adapter: vercel({
+        isr: true
+    }),
     vite: {
         resolve: {
             alias: {

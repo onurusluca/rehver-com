@@ -1,7 +1,13 @@
 ---
-import { supabase } from "@/lib/supabase";
-import type { Place } from "@/types/index";
-import BaseLayout from "@/layouts/BaseLayout.astro";
+export const prerender = false; // This page uses ISR
+
+import { createClient } from "@supabase/supabase-js";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const supabase = createClient(
+  "https://xngaipxdnpjswqofnpjr.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhuZ2FpcHhkbnBqc3dxb2ZucGpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk3OTcxMzAsImV4cCI6MjA2NTM3MzEzMH0.g1V9H_Kr3musiHJVoU-H4P0YeJlhRoJ1h4TzaHCi5d8"
+);
 
 const { slug } = Astro.params;
 
@@ -20,12 +26,9 @@ if (error || !place) {
 }
 
 const pageTitle = `${place.name} - ${place.district || place.city}`;
-const pageDescription =
-  place.description_tr || `${place.name} - ${place.address}`;
-const firstImage = place.image_urls?.[0];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} image={firstImage}>
+<BaseLayout title={pageTitle} description={place.description_tr || place.name}>
   <div class="mx-auto max-w-7xl px-4 py-8">
     <!-- Breadcrumb -->
     <nav class="mb-6 text-sm text-gray-600">

@@ -1,43 +1,59 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import type { Place } from "@/types/index";
+export const prerender = false;
+
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const url = Astro.url;
 const searchQuery = url.searchParams.get("q") || "";
 const selectedCity = url.searchParams.get("city") || "";
 
-console.log("🔍 Search page params:", {
-  searchQuery,
-  selectedCity,
-  hasQuery: !!(searchQuery.trim() || selectedCity.trim()),
-});
-
-let places: Place[] = [];
+let places = [];
 let totalResults = 0;
 let error = "";
 
 if (searchQuery.trim() || selectedCity.trim()) {
   try {
-    const searchUrl = new URL("/api/search", Astro.url.origin);
-    if (searchQuery) searchUrl.searchParams.set("q", searchQuery);
-    if (selectedCity) searchUrl.searchParams.set("city", selectedCity);
-
-    console.log("🚀 Calling search API:", searchUrl.toString()); // Add this
-
-    const response = await fetch(searchUrl.toString());
-    const data = await response.json();
-
-    console.log("📥 API Response:", {
-      ok: response.ok,
-      resultsCount: data.results?.length || 0,
-    });
-
-    if (response.ok) {
-      places = data.results || [];
-      totalResults = data.total || 0;
-    } else {
-      error = data.error || "Arama sırasında bir hata oluştu";
+    const filters = [];
+    if (selectedCity) {
+      filters.push(`city = "${selectedCity}"`);
     }
+
+    const searchBody = {
+      q: searchQuery || "*",
+      limit: 20,
+      attributesToRetrieve: [
+        "id",
+        "name",
+        "slug",
+        "description_tr",
+        "image_urls",
+        "city",
+        "district",
+        "rating",
+        "reviews_count",
+        "main_category",
+      ],
+    };
+
+    if (filters.length > 0) {
+      searchBody.filter = filters.join(" AND ");
+    }
+
+    const response = await fetch(
+      `https://rehver-meilisearch.fly.dev/indexes/places/search`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer 0b225f8a55668a5ac089b46352c7d9db1bf9f451bacff259d1a4414ba8bb0c57`,
+        },
+        body: JSON.stringify(searchBody),
+      }
+    );
+
+    const data = await response.json();
+    places = data.hits || [];
+    totalResults = data.estimatedTotalHits || 0;
   } catch (e) {
     error = "Arama sırasında bir hata oluştu";
   }
